@@ -7,7 +7,9 @@ import OurCommitments from "@/components/landing-page-sections/our-commitments";
 import { ShopByCategories } from "@/components/landing-page-sections/shop-by-categories";
 import Testimonials from "@/components/landing-page-sections/testimonials";
 import { TrendingNow } from "@/components/landing-page-sections/trending-now";
+import { SignUpModal } from "@/components/sign-up-modal";
 import { Roboto } from "next/font/google";
+import { useState } from "react";
 
 const font = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -15,6 +17,8 @@ const font = Roboto({
 });
 
 export default function Home() {
+  const [showSignUpModal, setShowSignUpModal] = useState(false);
+
   return (
     <div style={font.style} className="pt-20">
       <Hero />
@@ -25,7 +29,11 @@ export default function Home() {
       <CelebrationSpecial />
       <BestSeller />
       <OurCommitments />
-      <Testimonials/>
+      <Testimonials />
+      <SignUpModal
+        open={!showSignUpModal}
+        onClose={() => setShowSignUpModal(true)}
+      />
     </div>
   );
 }

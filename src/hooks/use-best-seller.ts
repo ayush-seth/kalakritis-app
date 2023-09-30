@@ -12,6 +12,6 @@ export function useBestSeller() {
 
 function fetchBestSeller() {
   return client
-    .get("api/products", { searchParams: { tags: "Bestseller" } })
+    .get("products", { searchParams: { tags: "Bestseller" } })
     .json<ApiResponse>();
 }
