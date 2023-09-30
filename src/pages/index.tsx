@@ -20,8 +20,6 @@ export default function Home() {
   const showLoginModal = useUserStore((s) => s.showLoginModal);
   const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
 
-  console.log(showLoginModal);
-
   return (
     <div style={font.style} className="pt-20">
       <Hero />

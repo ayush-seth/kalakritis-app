@@ -50,15 +50,37 @@ export function Navbar() {
             placeholder="Search for the product you are looking for"
           />
         </div>
-        <Link href="/wishlist">
+        <button
+          onClick={() => {
+            if (isLoggedIn) {
+              router.push("/wishlist");
+            } else {
+              setShowLoginModal(true);
+            }
+          }}
+        >
           <IconHeart />
-        </Link>
-        <Link href="/cart">
+        </button>
+        <button
+          onClick={() => {
+            if (isLoggedIn) {
+              router.push("/cart");
+            } else {
+              setShowLoginModal(true);
+            }
+          }}
+        >
           <IconShoppingCart />
-        </Link>
+        </button>
         <HoverCard.Root openDelay={0}>
           <HoverCard.Trigger className="cursor-pointer">
-            <IconUser />
+            <IconUser
+              onClick={() => {
+                if (!isLoggedIn) {
+                  setShowLoginModal(true);
+                }
+              }}
+            />
           </HoverCard.Trigger>
           <HoverCard.Portal>
             <HoverCard.Content
@@ -67,7 +89,7 @@ export function Navbar() {
               className="z-10 shadow"
             >
               <div className="flex w-52 flex-col bg-primary-400">
-                {isLoggedIn ? (
+                {isLoggedIn && (
                   <>
                     <button className="border-b border-primary-600 px-6 py-4 text-sm hover:bg-primary-600">
                       Profile
@@ -91,13 +113,6 @@ export function Navbar() {
                       Logout
                     </button>
                   </>
-                ) : (
-                  <button
-                    className="border-b border-primary-600 px-6 py-4 text-sm hover:bg-primary-600"
-                    onClick={() => setShowLoginModal(true)}
-                  >
-                    Log In
-                  </button>
                 )}
               </div>
             </HoverCard.Content>
