@@ -16,7 +16,7 @@ import { SectionHeading } from "./ui/section-heading";
 
 type Step = "Enter Email" | "Verify OTP" | "Enter Password" | "Register";
 
-type SignUpModalProps = {
+type LoginModalProps = {
   open: boolean;
   onClose: () => void;
 };
@@ -33,7 +33,7 @@ type Inputs = {
 
 const font = Frank_Ruhl_Libre({ weight: ["500"], subsets: ["latin"] });
 
-export function SignUpModal({ open, onClose }: SignUpModalProps) {
+export function LoginModal({ open, onClose }: LoginModalProps) {
   const {
     register,
     handleSubmit,
