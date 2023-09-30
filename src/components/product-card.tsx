@@ -19,10 +19,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <Link href={`/products/${product.id}`} passHref>
-      <div
-        className="relative cursor-pointer hover:shadow-custom"
-        onClick={() => console.log("card")}
-      >
+      <div className="relative cursor-pointer hover:shadow-custom">
         <Image
           className="w-full"
           src={product.product_images[0].img}

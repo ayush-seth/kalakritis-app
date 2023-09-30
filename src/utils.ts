@@ -7,5 +7,5 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const client = ky.extend({
-  prefixUrl: process.env.NEXT_PUBLIC_BACKEND_URL,
+  prefixUrl: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api`,
 });

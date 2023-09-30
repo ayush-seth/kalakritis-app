@@ -12,6 +12,6 @@ export function useNewArrivals() {
 
 function fetchNewArrivals() {
   return client
-    .get("api/products", { searchParams: { tags: "New Arrivals" } })
+    .get("products", { searchParams: { tags: "New Arrivals" } })
     .json<ApiResponse>();
 }

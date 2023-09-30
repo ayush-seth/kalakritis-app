@@ -7,6 +7,9 @@ const config: Config = {
       boxShadow: {
         custom: "0px 4px 10px 0px rgba(0, 0, 0, 0.25)",
       },
+      maxWidth: {
+        "8xl": "100rem",
+      },
       colors: {
         primary: {
           300: "#FFFDF9",

@@ -56,3 +56,11 @@ type Tag = {
   id: number;
   name: string;
 };
+
+export type FilterValue = ProductType | Color | Size;
+
+export type ProductFilter = {
+  key: string;
+  name: string;
+  values: FilterValue[];
+};

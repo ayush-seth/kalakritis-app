@@ -6,7 +6,7 @@ import {
   IconUser,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "./ui/logo";
 
 const NAV_LINKS = [
@@ -18,6 +18,8 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [menuOpened, setMenuOpened] = useState();
+
+  useEffect(() => console.log("NAVBAR RENDER"), []);
 
   return (
     <nav className="fixed z-10 flex h-20 w-[100%] items-center bg-primary-500 px-6 md:px-12">
