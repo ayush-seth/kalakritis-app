@@ -1,16 +1,21 @@
 import { cn } from "@/utils";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
-type ButtonProps = {} & DetailedHTMLProps<
+type ButtonProps = {
+  variant: "primary" | "secondary";
+} & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 
-export function Button({ className, children, ...rest }: ButtonProps) {
+export function Button({ className, variant, children, ...rest }: ButtonProps) {
   return (
     <button
       className={cn(
-        "inline-block bg-accent-500 px-4 py-2 uppercase text-white",
+        "inline-block px-4 py-2 uppercase",
+        variant === "primary" && "bg-accent-500 text-white",
+        variant === "secondary" &&
+          "bg-transparent text-accent-500 outline outline-accent-500",
         className,
       )}
       {...rest}
