@@ -12,7 +12,7 @@ export function Button({ className, variant, children, ...rest }: ButtonProps) {
   return (
     <button
       className={cn(
-        "inline-block px-4 py-2 uppercase",
+        "inline-block px-4 py-2 uppercase disabled:opacity-50",
         variant === "primary" && "bg-accent-500 text-white",
         variant === "secondary" &&
           "bg-transparent text-accent-500 outline outline-accent-500",

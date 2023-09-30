@@ -8,7 +8,7 @@ export function ProductsGrid() {
   const { data, isLoading } = useProducts(params);
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+    <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
       {data?.results.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

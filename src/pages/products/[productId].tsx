@@ -1,4 +1,4 @@
-import { useProduct } from "@/hooks/useProduct";
+import { useProduct } from "@/hooks/use-product";
 import { useParams } from "next/navigation";
 
 export default function ProductDetails() {
@@ -8,7 +8,7 @@ export default function ProductDetails() {
   const { data } = useProduct(productId);
 
   return (
-    <div className="max-w-8xl mx-auto px-10 pt-20">
+    <div className="mx-auto max-w-8xl px-10 pt-20">
       <div className="mt-20">{productId}</div>
     </div>
   );

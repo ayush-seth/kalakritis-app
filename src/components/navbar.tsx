@@ -9,8 +9,8 @@ import Link from "next/link";
 import { Logo } from "./ui/logo";
 
 const NAV_LINKS = [
-  { name: "New Arrivals", href: "/new-arrivals" },
-  { name: "Categories", href: "/categories" },
+  { name: "New Arrivals", href: "/products?tags=New Arrivals" },
+  { name: "Categories", href: "/products" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ];
