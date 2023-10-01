@@ -45,12 +45,15 @@ type ProductType = {
 type Color = {
   id: number;
   name: string;
+  hash_value: `#${string}`;
 };
 
 type Size = {
   id: number;
-  name: string;
+  name: SizeName;
 };
+
+export type SizeName = "XS" | "S" | "M" | "L" | "XL" | "XXL";
 
 type Tag = {
   id: number;

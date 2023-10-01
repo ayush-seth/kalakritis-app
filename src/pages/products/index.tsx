@@ -2,6 +2,7 @@ import { Filters } from "@/components/filters";
 import { ProductsGrid } from "@/components/products-grid";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Select } from "@/components/ui/select";
+import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -31,28 +32,33 @@ export default function ProductsPage() {
   const [sortingOption, setSortingOption] = useState(sortOptions[0]);
 
   return (
-    <div className="mx-auto max-w-8xl px-10 pt-20">
-      <div className="mt-20">
-        <SectionHeading className="my-10 text-left">
-          {params.get("tags")}
-        </SectionHeading>
-        <div className="mb-10 ml-auto w-60">
-          <Select
-            data={sortOptions}
-            value={sortingOption}
-            onChange={(v) => {
-              setSortingOption(v);
-              const p = new URLSearchParams(params);
-              p.set("ordering", v.value);
-              router.push(`?${p.toString()}`, undefined, { shallow: true });
-            }}
-          />
-        </div>
-        <div className="grid grid-cols-[400px,1fr] gap-12">
-          <Filters />
-          <ProductsGrid />
+    <>
+      <Head>
+        <title>Women Fashion | Kalakritis</title>
+      </Head>
+      <div className="mx-auto max-w-8xl px-10 pt-20">
+        <div className="mt-20">
+          <SectionHeading className="my-10 text-left">
+            {params.get("tags")}
+          </SectionHeading>
+          <div className="mb-10 ml-auto w-60">
+            <Select
+              data={sortOptions}
+              value={sortingOption}
+              onChange={(v) => {
+                setSortingOption(v);
+                const p = new URLSearchParams(params);
+                p.set("ordering", v.value);
+                router.push(`?${p.toString()}`, undefined, { shallow: true });
+              }}
+            />
+          </div>
+          <div className="grid grid-cols-[400px,1fr] gap-12">
+            <Filters />
+            <ProductsGrid />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

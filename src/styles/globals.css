@@ -6,3 +6,12 @@ body {
   max-width: 100dvw;
   overflow-x: hidden;
 }
+
+#product-description > ul {
+  margin-top: 1rem;
+}
+
+#product-description > ul > li {
+  list-style: disc;
+  margin-left: 1rem;
+}

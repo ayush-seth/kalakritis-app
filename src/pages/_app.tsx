@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { AppProps } from "next/app";
+import Head from "next/head";
 
 const queryClient = new QueryClient();
 
@@ -14,15 +15,20 @@ export default function App({ Component, pageProps }: AppProps) {
   const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Navbar />
-      <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen={false} />
-      <Footer />
-      <LoginModal
-        open={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-      />
-    </QueryClientProvider>
+    <>
+      <Head>
+        <title>Kalakritis</title>
+      </Head>
+      <QueryClientProvider client={queryClient}>
+        <Navbar />
+        <Component {...pageProps} />
+        <ReactQueryDevtools initialIsOpen={false} />
+        <Footer />
+        <LoginModal
+          open={showLoginModal}
+          onClose={() => setShowLoginModal(false)}
+        />
+      </QueryClientProvider>
+    </>
   );
 }
