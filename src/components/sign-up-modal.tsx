@@ -239,8 +239,6 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
                     {...register("confirm_password", {
                       required: "Please confirm your password",
                       validate: (d) => {
-                        console.log(d, getValues("password"));
-
                         return d === getValues("password")
                           ? undefined
                           : "Passwords must match";

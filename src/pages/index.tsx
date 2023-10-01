@@ -7,8 +7,6 @@ import OurCommitments from "@/components/landing-page-sections/our-commitments";
 import { ShopByCategories } from "@/components/landing-page-sections/shop-by-categories";
 import Testimonials from "@/components/landing-page-sections/testimonials";
 import { TrendingNow } from "@/components/landing-page-sections/trending-now";
-import { LoginModal } from "@/components/sign-up-modal";
-import { useUserStore } from "@/store";
 import { Roboto } from "next/font/google";
 
 const font = Roboto({
@@ -17,9 +15,6 @@ const font = Roboto({
 });
 
 export default function Home() {
-  const showLoginModal = useUserStore((s) => s.showLoginModal);
-  const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
-
   return (
     <div style={font.style} className="pt-20">
       <Hero />
@@ -31,10 +26,6 @@ export default function Home() {
       <BestSeller />
       <OurCommitments />
       <Testimonials />
-      <LoginModal
-        open={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
-      />
     </div>
   );
 }

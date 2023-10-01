@@ -5,7 +5,7 @@ import { ProductCard } from "./product-card";
 export function ProductsGrid() {
   const params = useSearchParams();
 
-  const { data, isLoading } = useProducts(params);
+  const { data } = useProducts(params);
 
   return (
     <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">

@@ -36,13 +36,13 @@ export function TrendingNow() {
             width={300}
             height={500}
             className="w-full scale-150"
-           />
-           <span className="absolute bottom-8 z-10 w-full text-center text-white text-xl">
-              New Gowns
-            </span>
+          />
+          <span className="absolute bottom-8 z-10 w-full text-center text-xl text-white">
+            New Gowns
+          </span>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="basis-2/5 overflow-hidden relative">
+          <div className="relative basis-2/5 overflow-hidden">
             <Image
               src={"/trending_now2.svg"}
               alt=""
@@ -50,11 +50,11 @@ export function TrendingNow() {
               height={500}
               className="w-full"
             />
-            <span className="absolute bottom-8 z-10 w-full text-center text-white text-xl">
-                New Gowns
+            <span className="absolute bottom-8 z-10 w-full text-center text-xl text-white">
+              New Gowns
             </span>
           </div>
-          <div className="basis-3/5 overflow-hidden relative">
+          <div className="relative basis-3/5 overflow-hidden">
             <Image
               src={"/trending_now3.svg"}
               alt=""
@@ -62,14 +62,13 @@ export function TrendingNow() {
               height={500}
               className="w-full scale-125"
             />
-            <span className="absolute bottom-8 z-10 w-full text-center text-white text-xl">
-                New Gowns
+            <span className="absolute bottom-8 z-10 w-full text-center text-xl text-white">
+              New Gowns
             </span>
           </div>
-          
         </div>
         <div className="flex flex-col gap-4">
-          <div className="basis-3/5 overflow-hidden relative">
+          <div className="relative basis-3/5 overflow-hidden">
             <Image
               src={"/trending_now4.svg"}
               alt=""
@@ -77,11 +76,11 @@ export function TrendingNow() {
               height={500}
               className="w-full scale-125"
             />
-            <span className="absolute bottom-8 z-10 w-full text-center text-white text-xl">
-                New Gowns
+            <span className="absolute bottom-8 z-10 w-full text-center text-xl text-white">
+              New Gowns
             </span>
           </div>
-          <div className="basis-2/5 overflow-hidden relative">
+          <div className="relative basis-2/5 overflow-hidden">
             <Image
               src={"/trending_now5.svg"}
               alt=""
@@ -89,11 +88,10 @@ export function TrendingNow() {
               height={500}
               className="w-full"
             />
-            <span className="absolute bottom-8 z-10 w-full text-center text-white text-xl">
-                New Gowns
+            <span className="absolute bottom-8 z-10 w-full text-center text-xl text-white">
+              New Gowns
             </span>
           </div>
-          
         </div>
       </div>
     </div>
