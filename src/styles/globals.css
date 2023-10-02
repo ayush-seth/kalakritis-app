@@ -15,3 +15,15 @@ body {
   list-style: disc;
   margin-left: 1rem;
 }
+
+.TabsTrigger[data-state="active"] path {
+  stroke: #914C28;
+}
+
+.TabsTrigger[data-state="active"] .tab-label {
+  border-bottom: 2px solid #914C28;
+}
+
+.TabsTrigger[data-state="active"] .tab-icon-container {
+  background-color: #F7EBD6;
+}

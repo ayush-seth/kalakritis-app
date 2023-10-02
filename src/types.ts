@@ -67,3 +67,26 @@ export type ProductFilter = {
   name: string;
   values: FilterValue[];
 };
+
+export type Address = {
+  id: number
+  name: string
+  email: string
+  country: string
+  state: string
+  address_line1: string
+  city: string
+  zipcode: string
+  phone_number: string
+  address_type: string
+  user: number
+}
+
+export type CartItem = {
+  id: number
+  product: Product
+  qty: number
+  size: string
+  color: string
+}
+
