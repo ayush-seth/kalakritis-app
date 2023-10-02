@@ -1,6 +1,8 @@
 import { ProductColorSelect } from "@/components/product/product-color-select";
+import { ProductExtraInfo } from "@/components/product/product-extra-info";
 import { ProductImageViewer } from "@/components/product/product-image-viewer";
 import { ProductInfo } from "@/components/product/product-info";
+import { ProductReviewCard } from "@/components/product/product-review-card";
 import { ProductSizeSelect } from "@/components/product/product-size-select";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
@@ -58,8 +60,7 @@ export default function ProductDetails() {
               onChange={setSelectedColor}
             />
 
-            {/*  */}
-            <div className="pt-20">
+            <div className="pt-10">
               <div className="flex items-center">
                 <Button variant="secondary" className="mr-3 bg-primary-500">
                   <IconHeart strokeWidth={1.3} />
@@ -72,7 +73,12 @@ export default function ProductDetails() {
                 buy now
               </Button>
             </div>
+            <ProductExtraInfo product={product} />
           </div>
+        </div>
+        <div className="mt-40 space-y-20">
+          <ProductReviewCard product={product} />
+          <ProductReviewCard product={product} />
         </div>
       </div>
     </>
