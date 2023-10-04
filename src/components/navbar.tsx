@@ -7,6 +7,7 @@ import {
   IconShoppingCart,
   IconUser,
 } from "@tabler/icons-react";
+import { deleteCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Logo } from "./ui/logo";
@@ -19,20 +20,22 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const isLoggedIn = useUserStore((s) => s.isLoggedIn);
-  const logout = useUserStore((s) => s.logOut);
+  const isLoggedIn = hasCookie("token");
+  const logout = () => {
+    deleteCookie("token");
+    router.push("/");
+  };
+
   const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
   const router = useRouter();
 
   return (
     <nav className="fixed z-10 flex h-20 w-[100%] items-center bg-primary-500 px-6 md:px-12">
       <IconMenu2 className={"mr-4 cursor-pointer md:hidden"} />
-      {/* Logo */}
       <Link href="/">
         <Logo />
       </Link>
 
-      {/* Primary Nav */}
       <ul className="ml-16 hidden gap-12 text-neutral-600 md:flex">
         {NAV_LINKS.map((link) => (
           <Link key={link.name} href={link.href}>
@@ -41,7 +44,6 @@ export function Navbar() {
         ))}
       </ul>
 
-      {/* Secondary Nav */}
       <div className="ml-auto flex items-center gap-8">
         <div className="hidden items-center gap-4 bg-primary-400 px-4 md:flex">
           <IconSearch />
@@ -105,10 +107,7 @@ export function Navbar() {
                     </button>
                     <button
                       className="border-b border-primary-600 px-6 py-4 text-sm hover:bg-primary-600"
-                      onClick={() => {
-                        logout();
-                        router.push("/");
-                      }}
+                      onClick={logout}
                     >
                       Logout
                     </button>

@@ -1,5 +1,6 @@
 import { Filters } from "@/components/filters";
 import { ProductsGrid } from "@/components/products-grid";
+import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Select } from "@/components/ui/select";
 import Head from "next/head";
@@ -36,7 +37,7 @@ export default function ProductsPage() {
       <Head>
         <title>Women Fashion | Kalakritis</title>
       </Head>
-      <div className="mx-auto max-w-8xl px-10 pt-20">
+      <Container>
         <div className="mt-20">
           <SectionHeading className="my-10 text-left">
             {params.get("tags")}
@@ -58,7 +59,7 @@ export default function ProductsPage() {
             <ProductsGrid />
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 }

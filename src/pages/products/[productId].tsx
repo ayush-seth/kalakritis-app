@@ -1,3 +1,4 @@
+import { ProductCard } from "@/components/product-card";
 import { ProductColorSelect } from "@/components/product/product-color-select";
 import { ProductExtraInfo } from "@/components/product/product-extra-info";
 import { ProductImageViewer } from "@/components/product/product-image-viewer";
@@ -6,8 +7,12 @@ import { ProductReviewCard } from "@/components/product/product-review-card";
 import { ProductSizeSelect } from "@/components/product/product-size-select";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { Loader } from "@/components/ui/loader";
+import { SectionHeading } from "@/components/ui/section-heading";
+import { useAddToCart } from "@/hooks/cart/use-add-to-cart";
 import { useProduct } from "@/hooks/use-product";
+import { useProducts } from "@/hooks/use-products";
 import { SizeName } from "@/types";
 import { IconHeart } from "@tabler/icons-react";
 import Head from "next/head";
@@ -21,11 +26,24 @@ export default function ProductDetails() {
     isError,
     isLoading,
   } = useProduct(params?.productId as string);
+
+  const addToCart = useAddToCart();
+
+  const products = useProducts();
   const [selectedSize, setSelectedSize] = useState<SizeName>();
   const [selectedColor, setSelectedColor] = useState<string>();
 
   if (isLoading) return <Loader />;
   if (isError) return "Something went wrong!";
+
+  const handleAddToCart = () => {
+    addToCart.mutate({
+      color: selectedColor ?? product.colors[0].hash_value,
+      product: product.id,
+      qty: 1,
+      size: selectedSize ?? product.sizes[0].name,
+    });
+  };
 
   const crumbs = [
     {
@@ -43,7 +61,7 @@ export default function ProductDetails() {
       <Head>
         <title>{product.title} | Kalakritis</title>
       </Head>
-      <div className="mx-auto max-w-7xl px-12 pt-[160px]">
+      <Container>
         <Breadcrumbs className="mb-10" items={crumbs} />
         <div className="grid-cols-2 gap-20 sm:grid">
           <ProductImageViewer product={product} />
@@ -56,7 +74,7 @@ export default function ProductDetails() {
             />
             <ProductColorSelect
               product={product}
-              value={selectedColor ?? product.colors[0].name}
+              value={selectedColor ?? product.colors[0].hash_value}
               onChange={setSelectedColor}
             />
 
@@ -65,7 +83,11 @@ export default function ProductDetails() {
                 <Button variant="secondary" className="mr-3 bg-primary-500">
                   <IconHeart strokeWidth={1.3} />
                 </Button>
-                <Button variant="secondary" className="w-full bg-primary-500">
+                <Button
+                  variant="secondary"
+                  className="w-full bg-primary-500"
+                  onClick={handleAddToCart}
+                >
                   add to cart
                 </Button>
               </div>
@@ -80,7 +102,13 @@ export default function ProductDetails() {
           <ProductReviewCard product={product} />
           <ProductReviewCard product={product} />
         </div>
-      </div>
+        <SectionHeading className="my-20">Similar Items</SectionHeading>
+        <div className="grid grid-cols-4 gap-10">
+          {products.data?.results
+            .slice(0, 4)
+            .map((item) => <ProductCard key={item.id} product={item} />)}
+        </div>
+      </Container>
     </>
   );
 }

@@ -26,7 +26,7 @@ export type Product = {
   product_care: string;
   avg_rating: number;
   total_reviews: number;
-  on_discount: string;
+  on_discount: boolean;
   discount_value: number;
   discount_percent: number;
 };
@@ -34,7 +34,7 @@ export type Product = {
 type ProductImage = {
   id: number;
   img: string;
-  order: string;
+  order: number;
 };
 
 type ProductType = {
@@ -45,7 +45,7 @@ type ProductType = {
 type Color = {
   id: number;
   name: string;
-  hash_value: `#${string}`;
+  hash_value: string;
 };
 
 type Size = {
@@ -69,24 +69,41 @@ export type ProductFilter = {
 };
 
 export type Address = {
-  id: number
-  name: string
-  email: string
-  country: string
-  state: string
-  address_line1: string
-  city: string
-  zipcode: string
-  phone_number: string
-  address_type: string
-  user: number
-}
+  id: number;
+  name: string;
+  email: string;
+  country: string;
+  state: string;
+  address_line1: string;
+  city: string;
+  zipcode: string;
+  phone_number: string;
+  address_type: string;
+  user: number;
+};
+
+export type CartDetails = {
+  no_of_items: number;
+  subtotal: number;
+  delivery_charges: string;
+  tax: number;
+  total: number;
+  cart_items: CartItem[];
+  coupon_details: CouponDetails;
+};
+
+type CouponDetails = {
+  coupon_name: string;
+  coupon_percent: string;
+  coupon_discount: string;
+  coupon_success_message: string;
+  coupon_error_message: string;
+};
 
 export type CartItem = {
-  id: number
-  product: Product
-  qty: number
-  size: string
-  color: string
-}
-
+  id: number;
+  product: Product;
+  qty: number;
+  size: string;
+  color: string;
+};

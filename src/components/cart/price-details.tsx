@@ -1,11 +1,10 @@
-import React from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type CouponDetails = {
   coupon_name: string | null;
-  coupon_percent: number;
-  coupon_discount: number;
+  coupon_percent: string;
+  coupon_discount: string;
   coupon_success_message: string | null;
   coupon_error_message: string | null;
 };

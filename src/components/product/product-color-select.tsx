@@ -19,8 +19,8 @@ export const ProductColorSelect = ({
         Color
       </RadioGroup.Label>
       <div className="mt-4 flex gap-4">
-        {product.colors.map(({ name, hash_value }) => (
-          <RadioGroup.Option key={name} value={name}>
+        {product.colors.map(({ hash_value }) => (
+          <RadioGroup.Option key={hash_value} value={hash_value}>
             {({ checked }) => (
               <div
                 className={cn(

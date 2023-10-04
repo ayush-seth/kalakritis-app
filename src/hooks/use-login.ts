@@ -1,15 +1,18 @@
-import { useUserStore } from "@/store";
 import { client } from "@/utils";
 import { useMutation } from "@tanstack/react-query";
+import { setCookie } from "cookies-next";
+
+type LoginInput = { email: string; password: string };
+type LoginResponse = { access: string; refresh: string };
 
 export function useLogin() {
-  const login = useUserStore((state) => state.logIn);
-
   return useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
+    mutationFn: ({ email, password }: LoginInput) =>
       client
         .post("users/token/", { json: { email, password } })
-        .json<{ access_token: string; refresh_token: string }>(),
-    onSuccess: () => login(),
+        .json<LoginResponse>(),
+    onSuccess: ({ access }) => {
+      setCookie("token", access);
+    },
   });
 }
