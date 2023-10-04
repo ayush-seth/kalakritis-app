@@ -1,13 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { CouponDetails } from "@/types";
 import Image from "next/image";
-
-type CouponDetails = {
-  coupon_name: string | null;
-  coupon_percent: string;
-  coupon_discount: string;
-  coupon_success_message: string | null;
-  coupon_error_message: string | null;
-};
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
 
 type PriceDetailsProps = {
   no_of_items: number;
@@ -19,14 +15,26 @@ type PriceDetailsProps = {
 };
 
 export default function PriceDetails(data: PriceDetailsProps) {
+  const { register, handleSubmit } = useForm<{
+    coupon: string;
+  }>();
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleApplyCoupon = ({ coupon }: { coupon: string }) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("coupon", coupon);
+    router.push(`/cart?${params.toString()}`, undefined, { shallow: true });
+  };
+
   return (
     <div className="border-l border-slate-500 py-5 pl-10">
       <div className="apply_coupon_area mb-16">
-        <h4 className="mb-4 text-lg font-medium">APPLY COUPONS</h4>
-        <form action="" className="flex gap-3">
+        <h4 className="mb-4 text-lg font-medium">APPLY COUPON</h4>
+        <form className="flex gap-3" onSubmit={handleSubmit(handleApplyCoupon)}>
           <input
-            type="text"
-            className="grow border border-slate-500 bg-[#FFFDF9] px-4 py-2 text-sm"
+            className="grow border border-slate-500 bg-[#FFFDF9] px-4 py-2 text-sm uppercase"
             maxLength={8}
             placeholder="ENTER COUPON CODE"
             defaultValue={
@@ -34,6 +42,7 @@ export default function PriceDetails(data: PriceDetailsProps) {
                 ? data.coupon_details.coupon_name
                 : ""
             }
+            {...register("coupon")}
           />
           <button className="h-11 bg-[black] px-8 text-white">APPLY</button>
         </form>

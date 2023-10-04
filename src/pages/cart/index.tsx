@@ -6,10 +6,12 @@ import { Container } from "@/components/ui/container";
 import { Loader } from "@/components/ui/loader";
 import { useCartDetails } from "@/hooks/cart/use-cart-details";
 import * as Tabs from "@radix-ui/react-tabs";
+import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function Cart() {
-  const cartDetails = useCartDetails();
+  const searchParams = useSearchParams();
+  const cartDetails = useCartDetails(searchParams.toString());
 
   if (cartDetails.isLoading) return <Loader />;
   if (cartDetails.isError) {

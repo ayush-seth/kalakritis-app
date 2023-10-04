@@ -92,7 +92,7 @@ export type CartDetails = {
   coupon_details: CouponDetails;
 };
 
-type CouponDetails = {
+export type CouponDetails = {
   coupon_name: string;
   coupon_percent: string;
   coupon_discount: string;

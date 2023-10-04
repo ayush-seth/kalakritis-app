@@ -1,49 +1,48 @@
 import { useAddAddress } from "@/hooks/address/use-add-address";
+import { useUpdateAddress } from "@/hooks/address/use-update-address";
 import { Address } from "@/types";
-import { useEffect } from "react";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Modal } from "./ui/modal";
 
+type AddressInput = Omit<Address, "id" | "user">;
+
 type AddressModalProps = {
-  open: boolean;
-  defaultValues?: Address;
-  onClose: () => void;
+  address?: Address;
 };
 
-export default function AddressModal({
-  open,
-  onClose,
-  defaultValues,
-}: AddressModalProps) {
+const AddressModal = NiceModal.create(({ address }: AddressModalProps) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm<Address>({
-    defaultValues: defaultValues,
+  } = useForm<AddressInput>({
+    defaultValues: address,
   });
 
   const addAddress = useAddAddress();
+  const updateAddress = useUpdateAddress();
+  const modal = useModal();
+  const isEditMode = address !== undefined;
 
-  const handleAddAddress = (address: Address) => {
-    addAddress.mutate(address);
+  const handleAddressSubmit = (addressInput: AddressInput) => {
+    if (isEditMode) {
+      updateAddress.mutate({ id: address.id, ...addressInput });
+    } else addAddress.mutate(addressInput);
   };
-
-  useEffect(() => reset(defaultValues), [defaultValues]);
 
   return (
     <Modal
-      open={open}
-      onClose={onClose}
+      open={modal.visible}
+      onClose={modal.remove}
       className="max-h-[80vh] max-w-[500px] overflow-auto"
     >
       <h4 className="mb-6 text-lg font-medium text-accent-700">
-        {!!defaultValues ? "Add New Address" : "Edit Address"}
+        {isEditMode ? "Edit Address" : "Add Address"}
       </h4>
-      <form onSubmit={handleSubmit(handleAddAddress)}>
+      <form onSubmit={handleSubmit(handleAddressSubmit)}>
         <div className="space-y-4">
           <h3 className="mb-3 font-medium">Contact Details</h3>
           <Input
@@ -71,14 +70,16 @@ export default function AddressModal({
             {...register("email", { required: "Email is required" })}
           />
         </div>
-        <div className="mb-8 mt-10">
+        <div className="mb-8 mt-10 space-y-4">
           <h3 className="mb-3 font-medium">Address Details</h3>
           <Input
             type="text"
             label="Address"
             className="w-full bg-white"
             error={errors.address_line1?.message}
-            {...register("address_line1", { required: "Address is required" })}
+            {...register("address_line1", {
+              required: "Address is required",
+            })}
           />
           <Input
             type="text"
@@ -142,9 +143,11 @@ export default function AddressModal({
         </div>
 
         <Button variant="primary" className="w-full ">
-          ADD ADDRESS
+          {isEditMode ? "Update" : "Add"}
         </Button>
       </form>
     </Modal>
   );
-}
+});
+
+export default AddressModal;
