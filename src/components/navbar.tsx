@@ -10,6 +10,7 @@ import {
 import { deleteCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { Logo } from "./ui/logo";
 
 const NAV_LINKS = [
@@ -28,6 +29,7 @@ export function Navbar() {
 
   const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const router = useRouter();
+  const [search, setSearch] = useState("");
 
   return (
     <nav className="fixed z-10 flex h-20 w-[100%] items-center bg-primary-500 px-6 md:px-12">
@@ -50,6 +52,11 @@ export function Navbar() {
           <input
             className="bg-transparent py-2 text-sm focus:outline-none"
             placeholder="Search for the product you are looking for"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.code === "Enter") router.push(`/products?search=${search}`);
+            }}
           />
         </div>
         <button
@@ -93,9 +100,12 @@ export function Navbar() {
               <div className="flex w-52 flex-col bg-primary-400">
                 {isLoggedIn && (
                   <>
-                    <button className="border-b border-primary-600 px-6 py-4 text-sm hover:bg-primary-600">
+                    <Link
+                      href="/profile"
+                      className="border-b border-primary-600 px-6 py-4 text-center text-sm hover:bg-primary-600"
+                    >
                       Profile
-                    </button>
+                    </Link>
                     <button className="border-b border-primary-600 px-6 py-4 text-sm hover:bg-primary-600">
                       Wishlist
                     </button>

@@ -24,6 +24,7 @@ export function ProductCard({
   }
 
   const [isWishlisted, setIsWishlisted] = useState(isWishlistItem);
+
   const addToWishlist = useAddToWishlist();
   const removeFromWishlist = useRemoveFromWishlist();
 
@@ -37,7 +38,7 @@ export function ProductCard({
           width={100}
           alt=""
         />
-        <div className="my-2 space-y-2 p-3">
+        <div className="my-2 flex flex-col gap-2 p-3">
           <span className="inline-block w-full truncate" title={product.title}>
             {product.title}
           </span>

@@ -1,5 +1,6 @@
 import { useDeleteFromCart } from "@/hooks/cart/use-delete-from-cart";
 import { useUpdateCartItemCount } from "@/hooks/cart/use-update-cart-item-count";
+import { useAddToWishlist } from "@/hooks/product/use-add-to-wishlist";
 import { CartItem } from "@/types";
 import Image from "next/image";
 
@@ -10,6 +11,7 @@ type CartCardProps = {
 export default function CartCard({ cartItem }: CartCardProps) {
   const updateCartItemCount = useUpdateCartItemCount();
   const deleteFromCart = useDeleteFromCart();
+  const addToWishlist = useAddToWishlist();
 
   return (
     <div className="flex w-full gap-5 border-b border-slate-500 p-3">
@@ -70,7 +72,16 @@ export default function CartCard({ cartItem }: CartCardProps) {
               Delete
             </button>
             <div className="h-5 w-[1px] bg-slate-500"></div>
-            <button className="underline">Move To Wishlist</button>
+            <button
+              className="underline"
+              onClick={() =>
+                addToWishlist.mutate(cartItem.product.id, {
+                  onSuccess: () => deleteFromCart.mutate({ id: cartItem.id }),
+                })
+              }
+            >
+              Move To Wishlist
+            </button>
           </div>
         </div>
       </div>

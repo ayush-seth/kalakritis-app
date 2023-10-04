@@ -38,25 +38,32 @@ export default function ProductsPage() {
         <title>Women Fashion | Kalakritis</title>
       </Head>
       <Container className="max-w-full">
-        <div className="mt-20">
-          <SectionHeading className="my-10 text-left">
-            {params.get("tags")}
+        <div>
+          <SectionHeading className="my-20 text-left text-5xl">
+            {params.get("tags") ?? params.has("search")
+              ? "Search results"
+              : "Shop now"}
           </SectionHeading>
-          <div className="mb-10 ml-auto w-60">
-            <Select
-              data={sortOptions}
-              value={sortingOption}
-              onChange={(v) => {
-                setSortingOption(v);
-                const p = new URLSearchParams(params);
-                p.set("ordering", v.value);
-                router.push(`?${p.toString()}`, undefined, { shallow: true });
-              }}
-            />
-          </div>
-          <div className="grid grid-cols-[400px,1fr] gap-12">
+
+          <div className="grid grid-cols-[250px,1fr] gap-12">
             <Filters />
-            <ProductsGrid />
+            <div>
+              <div className="mb-10 ml-auto w-60">
+                <Select
+                  data={sortOptions}
+                  value={sortingOption}
+                  onChange={(v) => {
+                    setSortingOption(v);
+                    const p = new URLSearchParams(params);
+                    p.set("ordering", v.value);
+                    router.push(`?${p.toString()}`, undefined, {
+                      shallow: true,
+                    });
+                  }}
+                />
+              </div>
+              <ProductsGrid />
+            </div>
           </div>
         </div>
       </Container>
