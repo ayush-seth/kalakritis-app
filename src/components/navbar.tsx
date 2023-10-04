@@ -1,4 +1,4 @@
-import { useUserStore } from "@/store";
+import { useModalStore } from "@/store";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import {
   IconHeart,
@@ -26,7 +26,7 @@ export function Navbar() {
     router.push("/");
   };
 
-  const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
+  const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const router = useRouter();
 
   return (

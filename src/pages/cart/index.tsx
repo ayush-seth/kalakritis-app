@@ -1,82 +1,15 @@
-import AddressModal from "@/components/add-edit-address";
-import AddressCard from "@/components/cart/address-card";
+import { AddressTab } from "@/components/cart/address-tab";
 import CartCard from "@/components/cart/cart-card";
 import { CartEmptyState } from "@/components/cart/cart-empty-state";
 import PriceDetails from "@/components/cart/price-details";
 import { Container } from "@/components/ui/container";
 import { Loader } from "@/components/ui/loader";
 import { useCartDetails } from "@/hooks/cart/use-cart-details";
-import { Address } from "@/types";
 import * as Tabs from "@radix-ui/react-tabs";
-import { IconPlus } from "@tabler/icons-react";
-import { useState } from "react";
 import toast from "react-hot-toast";
 
-const user_addresses = [
-  {
-    id: 1,
-    name: "Ravi Kumar Singh",
-    email: "ravii@gmail.com",
-    country: "India",
-    state: "WB",
-    address_line1: "ABC Road, ssss",
-    city: "Kolkata",
-    zipcode: "700098",
-    phone_number: "9876543210",
-    address_type: "2",
-    user: 1,
-  },
-  {
-    id: 2,
-    name: "Ayush Seth",
-    email: "ayush@gmail.com",
-    country: "India",
-    state: "UP",
-    address_line1: "CVV Raman Road",
-    city: "Kanpur",
-    zipcode: "700098",
-    phone_number: "9998765432",
-    address_type: "1",
-    user: 1,
-  },
-];
-
 export default function Cart() {
-  const defaultAddress = {
-    id: 0,
-    name: "",
-    email: "",
-    country: "",
-    state: "",
-    address_line1: "",
-    city: "",
-    zipcode: "",
-    phone_number: "",
-    address_type: "1",
-    user: 0,
-  };
-
   const cartDetails = useCartDetails();
-
-  let [showAddressModal, setShowAddressModal] = useState(false);
-  let [addressModalAction, setAddressModalAction] = useState<"add" | "edit">(
-    "add",
-  );
-  let [addressModalDefault, setAddressModalDefault] = useState(defaultAddress);
-
-  const openAddressModal = (action: "add" | "edit") => {
-    setAddressModalAction(action);
-    setShowAddressModal(true);
-  };
-
-  const closeAddressModal = () => {
-    setShowAddressModal(false);
-  };
-
-  const addNewAddress = () => {
-    setAddressModalDefault(defaultAddress);
-    openAddressModal("add");
-  };
 
   if (cartDetails.isLoading) return <Loader />;
   if (cartDetails.isError) {
@@ -236,21 +169,7 @@ export default function Cart() {
                   className="TabsContent flex flex-wrap gap-4"
                   value="shipping"
                 >
-                  {user_addresses.map((user_address: Address) => (
-                    <AddressCard
-                      key={user_address.id}
-                      openAddressModal={openAddressModal}
-                      setAddressModalDefault={setAddressModalDefault}
-                      data={user_address}
-                    />
-                  ))}
-                  <button
-                    onClick={addNewAddress}
-                    className="flex max-w-[350px] basis-full  flex-col items-center justify-center gap-2 rounded-md border border-accent-700 p-6 text-sm text-accent-700 hover:cursor-pointer"
-                  >
-                    <IconPlus />
-                    <span className="text-lg font-medium">Add</span>
-                  </button>
+                  <AddressTab />
                 </Tabs.Content>
               </div>
               <PriceDetails {...priceDetails} />
@@ -260,12 +179,6 @@ export default function Cart() {
           <CartEmptyState />
         )}
       </Container>
-      <AddressModal
-        open={showAddressModal}
-        onClose={closeAddressModal}
-        action={addressModalAction}
-        defaultData={addressModalDefault}
-      />
     </>
   );
 }

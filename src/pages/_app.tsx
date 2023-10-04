@@ -1,7 +1,7 @@
 import Footer from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { LoginModal } from "@/components/sign-up-modal";
-import { useUserStore } from "@/store";
+import { useModalStore } from "@/store";
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -12,8 +12,8 @@ import { Toaster } from "react-hot-toast";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  const showLoginModal = useUserStore((s) => s.showLoginModal);
-  const setShowLoginModal = useUserStore((s) => s.setShowLoginModal);
+  const showLoginModal = useModalStore((s) => s.showLoginModal);
+  const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
 
   return (
     <>

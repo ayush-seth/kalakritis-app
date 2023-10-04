@@ -1,8 +1,8 @@
-import { useIsUserRegistered } from "@/hooks/use-is-user-registered";
-import { useLogin } from "@/hooks/use-login";
-import { useRegister } from "@/hooks/use-register";
-import { useSendOtp } from "@/hooks/use-send-otp";
-import { useVerifyOtp } from "@/hooks/use-verify-otp";
+import { useIsUserRegistered } from "@/hooks/user/use-is-user-registered";
+import { useLogin } from "@/hooks/user/use-login";
+import { useRegister } from "@/hooks/user/use-register";
+import { useSendOtp } from "@/hooks/user/use-send-otp";
+import { useVerifyOtp } from "@/hooks/user/use-verify-otp";
 import { cn } from "@/utils";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { Frank_Ruhl_Libre } from "next/font/google";
@@ -99,12 +99,7 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
                 });
                 break;
               case "Enter Password":
-                login.mutate(
-                  { email, password },
-                  {
-                    onSuccess: (data) => alert(JSON.stringify(data)),
-                  },
-                );
+                login.mutate({ email, password });
                 break;
               case "Verify OTP":
                 verifyOtp.mutate(

@@ -1,17 +1,24 @@
 import { create } from "zustand";
 
-type UserStore = {
-  isLoggedIn: boolean;
+type ModalStore = {
   showLoginModal: boolean;
   setShowLoginModal: (v: boolean) => void;
-  logIn: () => void;
-  logOut: () => void;
+
+  showAddressModal: boolean;
+  addressModalType: "add" | "edit";
+
+  setAddressModalType: (t: "add" | "edit") => void;
+  openAddressModal: () => void;
+  closeAddressModal: () => void;
 };
 
-export const useUserStore = create<UserStore>((set) => ({
-  isLoggedIn: false,
+export const useModalStore = create<ModalStore>((set) => ({
   showLoginModal: false,
   setShowLoginModal: (v) => set({ showLoginModal: v }),
-  logIn: () => set({ isLoggedIn: true, showLoginModal: false }),
-  logOut: () => set({ isLoggedIn: false }),
+
+  showAddressModal: false,
+  addressModalType: "add",
+  setAddressModalType: (t) => set({ addressModalType: t }),
+  openAddressModal: () => set({ showAddressModal: true }),
+  closeAddressModal: () => set({ showAddressModal: false }),
 }));

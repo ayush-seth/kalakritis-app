@@ -1,4 +1,4 @@
-import { useProducts } from "@/hooks/use-products";
+import { useProducts } from "@/hooks/product/use-products";
 import { useSearchParams } from "next/navigation";
 import { ProductCard } from "./product-card";
 

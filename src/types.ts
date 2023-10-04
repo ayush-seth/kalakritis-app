@@ -78,7 +78,7 @@ export type Address = {
   city: string;
   zipcode: string;
   phone_number: string;
-  address_type: string;
+  address_type: "home" | "office" | "others";
   user: number;
 };
 

@@ -1,4 +1,4 @@
-import { useProductFiltersList } from "@/hooks/use-product-filters-list";
+import { useProductFiltersList } from "@/hooks/product/use-product-filters-list";
 import { FilterValue, ProductFilter } from "@/types";
 import { Accordion, AccordionItem } from "@szhsin/react-accordion";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";

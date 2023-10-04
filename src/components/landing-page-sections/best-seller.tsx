@@ -1,4 +1,4 @@
-import { useNewArrivals } from "@/hooks/use-new-arrivals";
+import { useNewArrivals } from "@/hooks/product/use-new-arrivals";
 import { ProductCard } from "../product-card";
 import { ErrorAlert } from "../ui/error-alert";
 import { SectionHeading } from "../ui/section-heading";
