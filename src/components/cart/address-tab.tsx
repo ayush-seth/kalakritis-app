@@ -3,6 +3,7 @@ import { Address } from "@/types";
 import NiceModal from "@ebay/nice-modal-react";
 import { IconPlus } from "@tabler/icons-react";
 import AddressModal from "../address-modal";
+import { Loader } from "../ui/loader";
 import AddressCard from "./address-card";
 
 export const AddressTab = () => {
@@ -11,6 +12,9 @@ export const AddressTab = () => {
   const handleEdit = (address: Address) => {
     NiceModal.show(AddressModal, { address });
   };
+
+  if (addresses.isLoading) return <Loader />;
+  if (addresses.isError) return "Something went wrong!";
 
   return (
     <>

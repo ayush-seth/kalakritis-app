@@ -1,3 +1,4 @@
+import { useUserStore } from "@/store";
 import { Address } from "@/types";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { Button } from "../ui/button";
@@ -8,6 +9,9 @@ type AddressCardProps = {
 };
 
 export default function AddressCard({ address, onEdit }: AddressCardProps) {
+  const setSelectedAddress = useUserStore((s) => s.setSelectedAddress);
+  const setTab = useUserStore((s) => s.setTab);
+
   return (
     <div className="max-w-[350px] basis-full rounded-md border border-accent-700 p-6 text-sm">
       <h5 className="font-medium">{address.name}</h5>
@@ -24,7 +28,14 @@ export default function AddressCard({ address, onEdit }: AddressCardProps) {
         >
           Edit
         </Button>
-        <Button variant="primary" className="flex items-center gap-2">
+        <Button
+          variant="primary"
+          className="flex items-center gap-2"
+          onClick={() => {
+            setSelectedAddress(address);
+            setTab("payment");
+          }}
+        >
           Deliver here <IconArrowNarrowRight />
         </Button>
       </div>

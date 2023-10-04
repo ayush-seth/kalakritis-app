@@ -4,14 +4,20 @@ import { CartEmptyState } from "@/components/cart/cart-empty-state";
 import PriceDetails from "@/components/cart/price-details";
 import { Container } from "@/components/ui/container";
 import { Loader } from "@/components/ui/loader";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { useCartDetails } from "@/hooks/cart/use-cart-details";
+import { Tab, useUserStore } from "@/store";
 import * as Tabs from "@radix-ui/react-tabs";
+import { IconEdit } from "@tabler/icons-react";
 import { useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 
 export default function Cart() {
   const searchParams = useSearchParams();
   const cartDetails = useCartDetails(searchParams.toString());
+  const selectedAddress = useUserStore((s) => s.selectedAddress);
+  const tabValue = useUserStore((s) => s.tab);
+  const setTab = useUserStore((s) => s.setTab);
 
   if (cartDetails.isLoading) return <Loader />;
   if (cartDetails.isError) {
@@ -26,7 +32,11 @@ export default function Cart() {
     <>
       <Container>
         {cartItems.length > 0 ? (
-          <Tabs.Root className="TabsRoot" defaultValue="cart">
+          <Tabs.Root
+            className="TabsRoot"
+            value={tabValue}
+            onValueChange={(v) => setTab(v as Tab)}
+          >
             <Tabs.List className="TabsList mb-20 flex justify-center gap-28">
               <Tabs.Trigger
                 className="TabsTrigger text-[#808080] data-[state=active]:text-[#914C28]"
@@ -127,7 +137,7 @@ export default function Cart() {
               <Tabs.Trigger
                 className="TabsTrigger text-[#808080] data-[state=active]:text-[#914C28]"
                 value="payment"
-                disabled={true}
+                disabled={selectedAddress === null}
               >
                 <div className="flex items-center gap-3">
                   <div className="tab-icon-container flex h-10 w-10 items-center justify-center rounded-full bg-[#DEDDDA]">
@@ -172,6 +182,36 @@ export default function Cart() {
                   value="shipping"
                 >
                   <AddressTab />
+                </Tabs.Content>
+                <Tabs.Content
+                  className="TabsContent flex flex-wrap gap-4"
+                  value="payment"
+                >
+                  {selectedAddress && (
+                    <div className="w-full border-b border-gray-300 p-2 text-sm">
+                      <div className="flex items-center justify-between">
+                        <SectionHeading className="mb-4 text-left text-xl text-black">
+                          Selected Address
+                        </SectionHeading>
+                        <IconEdit
+                          size={20}
+                          className="cursor-pointer"
+                          onClick={() => setTab("shipping")}
+                        />
+                      </div>
+                      <h5 className="font-medium">{selectedAddress.name}</h5>
+                      <span className="my-1 block">
+                        {selectedAddress.phone_number}
+                      </span>
+                      <span className="mb-6 block">
+                        {selectedAddress.address_line1}, {selectedAddress.city},{" "}
+                        {selectedAddress.state}-{selectedAddress.zipcode}
+                      </span>
+                    </div>
+                  )}
+                  {cartItems.map((cartItem) => (
+                    <CartCard key={cartItem.id} cartItem={cartItem} />
+                  ))}
                 </Tabs.Content>
               </div>
               <PriceDetails {...priceDetails} />

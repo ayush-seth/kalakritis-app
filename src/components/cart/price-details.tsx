@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useUserStore } from "@/store";
 import { CouponDetails } from "@/types";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -21,6 +22,9 @@ export default function PriceDetails(data: PriceDetailsProps) {
 
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const tabValue = useUserStore((s) => s.tab);
+  const setTab = useUserStore((s) => s.setTab);
 
   const handleApplyCoupon = ({ coupon }: { coupon: string }) => {
     const params = new URLSearchParams(searchParams);
@@ -94,11 +98,24 @@ export default function PriceDetails(data: PriceDetailsProps) {
           className="w-full"
         />
       </div>
-      <div>
-        <Button variant="primary" className="w-full">
-          SELECT ADDRESS
+      {tabValue === "cart" && (
+        <Button
+          variant="primary"
+          className="w-full"
+          onClick={() => setTab("shipping")}
+        >
+          select address
         </Button>
-      </div>
+      )}
+      {tabValue === "payment" && (
+        <Button
+          variant="primary"
+          className="w-full"
+          onClick={() => setTab("shipping")}
+        >
+          pay now
+        </Button>
+      )}
     </div>
   );
 }

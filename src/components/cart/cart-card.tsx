@@ -12,7 +12,7 @@ export default function CartCard({ cartItem }: CartCardProps) {
   const deleteFromCart = useDeleteFromCart();
 
   return (
-    <div className="flex gap-5 border-b border-slate-500 p-3">
+    <div className="flex w-full gap-5 border-b border-slate-500 p-3">
       <div className="shrink-0">
         <Image
           src={cartItem.product.product_images[0].img}

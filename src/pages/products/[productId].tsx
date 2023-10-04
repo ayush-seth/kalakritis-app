@@ -11,6 +11,7 @@ import { Container } from "@/components/ui/container";
 import { Loader } from "@/components/ui/loader";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { useAddToCart } from "@/hooks/cart/use-add-to-cart";
+import { useBuyNow } from "@/hooks/cart/use-buy-now";
 import { useProduct } from "@/hooks/product/use-product";
 import { useProducts } from "@/hooks/product/use-products";
 import { SizeName } from "@/types";
@@ -28,6 +29,7 @@ export default function ProductDetails() {
   } = useProduct(params?.productId as string);
 
   const addToCart = useAddToCart();
+  const buyNow = useBuyNow();
 
   const products = useProducts();
   const [selectedSize, setSelectedSize] = useState<SizeName>();
@@ -43,6 +45,17 @@ export default function ProductDetails() {
       qty: 1,
       size: selectedSize ?? product.sizes[0].name,
     });
+  };
+
+  const handleBuyNow = () => {
+    return () => {
+      buyNow.mutate({
+        color: selectedColor ?? product.colors[0].hash_value,
+        product: product.id,
+        qty: 1,
+        size: selectedSize ?? product.sizes[0].name,
+      });
+    };
   };
 
   const crumbs = [
@@ -91,7 +104,11 @@ export default function ProductDetails() {
                   add to cart
                 </Button>
               </div>
-              <Button variant="primary" className="mt-3 w-full">
+              <Button
+                variant="primary"
+                className="mt-3 w-full"
+                onClick={handleBuyNow()}
+              >
                 buy now
               </Button>
             </div>

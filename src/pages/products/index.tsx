@@ -37,7 +37,7 @@ export default function ProductsPage() {
       <Head>
         <title>Women Fashion | Kalakritis</title>
       </Head>
-      <Container>
+      <Container className="max-w-full">
         <div className="mt-20">
           <SectionHeading className="my-10 text-left">
             {params.get("tags")}
