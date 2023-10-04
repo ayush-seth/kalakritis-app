@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/product/product-card";
 import { ProductColorSelect } from "@/components/product/product-color-select";
 import { ProductExtraInfo } from "@/components/product/product-extra-info";
 import { ProductImageViewer } from "@/components/product/product-image-viewer";

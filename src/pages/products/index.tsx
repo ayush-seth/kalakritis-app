@@ -1,5 +1,5 @@
 import { Filters } from "@/components/filters";
-import { ProductsGrid } from "@/components/products-grid";
+import { ProductsGrid } from "@/components/product/products-grid";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Select } from "@/components/ui/select";

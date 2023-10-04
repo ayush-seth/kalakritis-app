@@ -1,7 +1,7 @@
 import { useProducts } from "@/hooks/product/use-products";
 import { useSearchParams } from "next/navigation";
+import { Loader } from "../ui/loader";
 import { ProductCard } from "./product-card";
-import { Loader } from "./ui/loader";
 
 export function ProductsGrid() {
   const params = useSearchParams();

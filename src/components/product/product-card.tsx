@@ -1,3 +1,5 @@
+import { useAddToWishlist } from "@/hooks/product/use-add-to-wishlist";
+import { useRemoveFromWishlist } from "@/hooks/product/use-remove-from-wishlist";
 import { Product } from "@/types";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import Image from "next/image";
@@ -6,19 +8,27 @@ import { MouseEvent, useState } from "react";
 
 type ProductCardProps = {
   product: Product;
+  isWishlistItem?: boolean;
+  wishlistId?: number;
 };
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({
+  product,
+  isWishlistItem,
+  wishlistId,
+}: ProductCardProps) {
   function toggleWishlist(e: MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     e.preventDefault();
     setIsWishlisted((prev) => !prev);
   }
 
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [isWishlisted, setIsWishlisted] = useState(isWishlistItem);
+  const addToWishlist = useAddToWishlist();
+  const removeFromWishlist = useRemoveFromWishlist();
 
   return (
-    <Link href={`/products/${product.id}`} passHref>
+    <Link href={`/products/${product.id}`}>
       <div className="relative cursor-pointer hover:shadow-custom">
         <Image
           className="w-full"
@@ -42,7 +52,14 @@ export function ProductCard({ product }: ProductCardProps) {
           </div>
           <button
             className="absolute right-2 top-2 rounded-full bg-gray-300 bg-opacity-60 p-1 hover:bg-opacity-100"
-            onClick={toggleWishlist}
+            onClick={(e) => {
+              toggleWishlist(e);
+              if (isWishlisted) {
+                removeFromWishlist.mutate(wishlistId!);
+                return;
+              }
+              addToWishlist.mutate(product.id);
+            }}
           >
             {isWishlisted ? (
               <IconHeartFilled
