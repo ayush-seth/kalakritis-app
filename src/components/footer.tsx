@@ -107,7 +107,7 @@ export default function Footer() {
         <h4 className="text-xs font-bold tracking-[1px]">SUBSCRIBE</h4>
         <form action="">
           <span className="mb-4 block">
-            Sign up. You'll love hearing from us
+            Sign up. You&apos;ll love hearing from us
           </span>
           <div className="subscribe_form_element flex w-full max-w-[360px]">
             <input

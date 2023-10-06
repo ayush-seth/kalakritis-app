@@ -54,6 +54,7 @@ export default function SlideShow(props: {
     }, props.time * 1000);
     generateSlidshowNav();
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slidehsowstatus, props.length]);
 
   return (

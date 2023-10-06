@@ -1,7 +1,6 @@
-import React from "react";
-import { SectionHeading } from "../ui/section-heading";
-import SlideShow from "../slideshow";
 import Image from "next/image";
+import SlideShow from "../slideshow";
+import { SectionHeading } from "../ui/section-heading";
 
 export default function Testimonials() {
   return (
@@ -47,8 +46,8 @@ export default function Testimonials() {
                 Five stars all the way! This e-commerce store not only offers a
                 wide range of products but also provides detailed product
                 descriptions and customer reviews that help me make informed
-                decisions. It's evident that they care about their customers'
-                satisfaction. I'm a happy shopper
+                decisions. It&apos;s evident that they care about their
+                customers&apos; satisfaction. I&apos;m a happy shopper
               </p>
               <Image
                 src={"/test_profile2.png"}
@@ -102,8 +101,8 @@ export default function Testimonials() {
                 Five stars all the way! This e-commerce store not only offers a
                 wide range of products but also provides detailed product
                 descriptions and customer reviews that help me make informed
-                decisions. It's evident that they care about their customers'
-                satisfaction. I'm a happy shopper
+                decisions. It&apos;s evident that they care about their
+                customers&apos; satisfaction. I&apos;m a happy shopper
               </p>
               <Image
                 src={"/test_profile2.png"}
@@ -157,8 +156,8 @@ export default function Testimonials() {
                 Five stars all the way! This e-commerce store not only offers a
                 wide range of products but also provides detailed product
                 descriptions and customer reviews that help me make informed
-                decisions. It's evident that they care about their customers'
-                satisfaction. I'm a happy shopper
+                decisions. It&apos;s evident that they care about their
+                customers&apos; satisfaction. I&apos;m a happy shopper
               </p>
               <Image
                 src={"/test_profile2.png"}
