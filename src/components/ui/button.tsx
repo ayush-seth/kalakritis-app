@@ -1,14 +1,22 @@
 import { cn } from "@/utils";
+import { IconLoader } from "@tabler/icons-react";
 import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
 type ButtonProps = {
   variant: "primary" | "secondary";
+  loading?: boolean;
 } & DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 
-export function Button({ className, variant, children, ...rest }: ButtonProps) {
+export function Button({
+  className,
+  variant,
+  children,
+  loading = false,
+  ...rest
+}: ButtonProps) {
   return (
     <button
       className={cn(
@@ -19,8 +27,16 @@ export function Button({ className, variant, children, ...rest }: ButtonProps) {
         className,
       )}
       {...rest}
+      disabled={loading}
     >
-      {children}
+      {loading ? (
+        <div className="flex gap-2">
+          <IconLoader className="animate-spin" />
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 }

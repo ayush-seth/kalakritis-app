@@ -1,3 +1,4 @@
+import { PasswordSettings } from "@/components/settings/password-settings";
 import { ProfileSettings } from "@/components/settings/profile-settings";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Container } from "@/components/ui/container";
@@ -97,14 +98,16 @@ const ProfilePage = () => {
             </Tab.List>
             <Tab.Panels
               className={cn(
-                "block px-6 py-4",
+                "block px-6 py-12",
                 isMobile && !menuOpen && "hidden",
               )}
             >
               <Tab.Panel>
                 <ProfileSettings />
               </Tab.Panel>
-              <Tab.Panel>Content 2</Tab.Panel>
+              <Tab.Panel>
+                <PasswordSettings />
+              </Tab.Panel>
               <Tab.Panel>Content 3</Tab.Panel>
               <Tab.Panel>Content 4</Tab.Panel>
               <Tab.Panel>Content 5</Tab.Panel>
