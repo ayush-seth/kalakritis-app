@@ -107,3 +107,11 @@ export type CartItem = {
   size: string;
   color: string;
 };
+
+export type User = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  email: string;
+};

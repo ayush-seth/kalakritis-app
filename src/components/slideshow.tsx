@@ -36,6 +36,7 @@ export default function SlideShow(props: {
     for (let i = 0; i < props.length; i++) {
       nav_list.push(
         <button
+          key={i}
           onClick={() => moveToSlide(-i * 100)}
           className={`${
             slidehsowstatus == i
@@ -58,18 +59,16 @@ export default function SlideShow(props: {
   }, [slidehsowstatus, props.length]);
 
   return (
-    <>
-      <div className="slideshow_container relative h-full w-full overflow-hidden">
-        <div
-          className="slideshow flex transition-[0.5s]"
-          style={{ transform: `translateX(${slidehsowstyle}%)` }}
-        >
-          {props.children}
-        </div>
-        <div className={`slideshow_nav ${props.nav_container_css_class}`}>
-          {slideshowNav}
-        </div>
+    <div className="slideshow_container relative h-full w-full overflow-hidden">
+      <div
+        className="slideshow flex transition-[0.5s]"
+        style={{ transform: `translateX(${slidehsowstyle}%)` }}
+      >
+        {props.children}
       </div>
-    </>
+      <div className={`slideshow_nav ${props.nav_container_css_class}`}>
+        {slideshowNav}
+      </div>
+    </div>
   );
 }
