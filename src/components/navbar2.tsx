@@ -176,15 +176,15 @@ export default function NewNavBar() {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <button
                                 className={cn(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700",
+                                  "tetx-left block px-4 py-2 text-sm text-gray-700",
                                 )}
+                                onClick={logout}
                               >
                                 Sign out
-                              </a>
+                              </button>
                             )}
                           </Menu.Item>
                         </Menu.Items>
@@ -280,9 +280,9 @@ export default function NewNavBar() {
                     Your Profile
                   </Disclosure.Button>
                   <Disclosure.Button
-                    as="a"
-                    href="#"
+                    as="button"
                     className="block px-3 py-2 text-base hover:bg-primary-600"
+                    onClick={logout}
                   >
                     Sign out
                   </Disclosure.Button>
@@ -290,10 +290,18 @@ export default function NewNavBar() {
               </div>
             ) : (
               <div className="flex gap-2 p-2">
-                <Button variant="primary" className="px-8">
+                <Button
+                  variant="primary"
+                  className="px-8"
+                  onClick={() => setShowLoginModal(true)}
+                >
                   LOGIN
                 </Button>
-                <Button variant="secondary" className="px-8">
+                <Button
+                  variant="secondary"
+                  className="px-8"
+                  onClick={() => setShowLoginModal(true)}
+                >
                   SIGN UP
                 </Button>
               </div>

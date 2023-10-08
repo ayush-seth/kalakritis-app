@@ -19,7 +19,10 @@ export function Modal({ open, onClose, children, className }: ModalProps) {
             className,
           )}
         >
-          <button className="absolute right-8 top-8" onClick={onClose}>
+          <button
+            className="absolute right-8 top-16 md:top-8"
+            onClick={onClose}
+          >
             <IconX strokeWidth={1} />
           </button>
           <Dialog.Title></Dialog.Title>

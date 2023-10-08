@@ -73,9 +73,11 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
   const isLoading = login.isLoading || sendOtp.isLoading || verifyOtp.isLoading;
 
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={onClose} className="px-4 md:px-8">
       <form
-        className={cn("grid grid-cols-[400px,1fr] gap-12")}
+        className={cn(
+          "grid h-screen md:h-auto md:grid-cols-[300px,1fr] md:gap-8 lg:grid-cols-[400px,1fr] lg:gap-12",
+        )}
         onSubmit={handleSubmit(
           ({ email, password, otp, first_name, last_name, phone_number }) => {
             switch (step) {
@@ -128,7 +130,7 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
           },
         )}
       >
-        <div>
+        <div className="hidden md:block">
           <Image
             src="/login-modal.jpeg"
             width={100}
@@ -138,21 +140,23 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
           />
         </div>
 
-        <div className="flex flex-col justify-center gap-8">
+        <div className="flex flex-col gap-3 pt-20 md:justify-center md:gap-6 md:pt-0 lg:gap-8">
           {step === "Verify OTP" && (
             <button onClick={goToEmailStep}>
               <IconArrowLeft />
             </button>
           )}
-          <SectionHeading className="text-left">{modalTitle}</SectionHeading>
-          <p className="text-gray-700">
+          <SectionHeading className="px-0 text-left text-2xl md:text-4xl">
+            {modalTitle}
+          </SectionHeading>
+          <p className="mb-4 text-sm text-gray-700 md:mb-0 md:text-base">
             Register to get instant update about our new launches and offers.
             Check your Email address after registration for 10% Discount coupon
             code
           </p>
 
-          <div className="space-y-8">
-            <h2 className="text-2xl" style={font.style}>
+          <div className="md:space-y-8">
+            <h2 className="mb-5 text-lg md:mb-0 md:text-2xl" style={font.style}>
               Sign in or Sign up
             </h2>
             <div>
@@ -244,7 +248,7 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
               )}
             </div>
           </div>
-          <span className="block text-sm font-light">
+          <span className="my-5 block text-sm font-light md:my-0">
             By continuing I agree with the{" "}
             <a href="" className="text-accent-400">
               Terms of use
