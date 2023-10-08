@@ -15,6 +15,6 @@ export const useWishlist = () => {
     queryKey: ["wishlist"],
     queryFn: () =>
       authenticatedClient.get("wishlist/").json<WishlistResponse>(),
-    onError: () => toast.error("Error fetching  wishlist"),
+    onError: () => toast.error("Error fetching wishlist"),
   });
 };

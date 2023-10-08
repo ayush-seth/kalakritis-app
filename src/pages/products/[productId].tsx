@@ -14,6 +14,7 @@ import { useAddToCart } from "@/hooks/cart/use-add-to-cart";
 import { useBuyNow } from "@/hooks/cart/use-buy-now";
 import { useProduct } from "@/hooks/product/use-product";
 import { useProducts } from "@/hooks/product/use-products";
+import { useAddToWishlist } from "@/hooks/wishlist/use-add-to-wishlist";
 import { SizeName } from "@/types";
 import { IconHeart } from "@tabler/icons-react";
 import Head from "next/head";
@@ -30,6 +31,7 @@ export default function ProductDetails() {
 
   const addToCart = useAddToCart();
   const buyNow = useBuyNow();
+  const addToWishlist = useAddToWishlist();
 
   const products = useProducts();
   const [selectedSize, setSelectedSize] = useState<SizeName>();
@@ -48,14 +50,16 @@ export default function ProductDetails() {
   };
 
   const handleBuyNow = () => {
-    return () => {
-      buyNow.mutate({
-        color: selectedColor ?? product.colors[0].hash_value,
-        product: product.id,
-        qty: 1,
-        size: selectedSize ?? product.sizes[0].name,
-      });
-    };
+    buyNow.mutate({
+      color: selectedColor ?? product.colors[0].hash_value,
+      product: product.id,
+      qty: 1,
+      size: selectedSize ?? product.sizes[0].name,
+    });
+  };
+
+  const handleWishlist = () => {
+    addToWishlist.mutate(product.id);
   };
 
   const crumbs = [
@@ -93,7 +97,11 @@ export default function ProductDetails() {
 
             <div className="hidden pt-10 lg:block">
               <div className="flex items-center">
-                <Button variant="secondary" className="mr-3 bg-primary-500">
+                <Button
+                  variant="secondary"
+                  className="mr-3 bg-primary-500"
+                  onClick={handleWishlist}
+                >
                   <IconHeart strokeWidth={1.3} />
                 </Button>
                 <Button
@@ -107,7 +115,7 @@ export default function ProductDetails() {
               <Button
                 variant="primary"
                 className="mt-3 w-full"
-                onClick={handleBuyNow()}
+                onClick={handleBuyNow}
               >
                 buy now
               </Button>

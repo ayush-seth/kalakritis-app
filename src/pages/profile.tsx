@@ -1,7 +1,9 @@
+import { AddressSettings } from "@/components/settings/address-settings";
 import { PasswordSettings } from "@/components/settings/password-settings";
 import { ProfileSettings } from "@/components/settings/profile-settings";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { Container } from "@/components/ui/container";
+import { useUserDetails } from "@/hooks/user/use-user-details";
 import { cn } from "@/utils";
 import { Tab } from "@headlessui/react";
 import {
@@ -54,6 +56,7 @@ const ProfilePage = () => {
   const { width } = useWindowSize();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const user = useUserDetails();
 
   const isMobile = width! < 768;
 
@@ -69,7 +72,9 @@ const ProfilePage = () => {
       >
         {menuOpen && isMobile ? getTabName(activeTabIndex) : "My Account"}
       </h1>
-      <span className="mt-3 block font-medium">Rose Singh</span>
+      <span className="mt-3 block font-medium">
+        {user.data?.first_name} {user.data?.last_name}
+      </span>
       <div className="-mx-4 mt-6 border-y-[0.4px] border-black">
         <Tab.Group selectedIndex={activeTabIndex} onChange={setActiveTabIndex}>
           <div className="md:grid md:grid-cols-[300px,1fr] md:gap-4">
@@ -110,7 +115,9 @@ const ProfilePage = () => {
               </Tab.Panel>
               <Tab.Panel>Content 3</Tab.Panel>
               <Tab.Panel>Content 4</Tab.Panel>
-              <Tab.Panel>Content 5</Tab.Panel>
+              <Tab.Panel>
+                <AddressSettings />
+              </Tab.Panel>
             </Tab.Panels>
           </div>
         </Tab.Group>

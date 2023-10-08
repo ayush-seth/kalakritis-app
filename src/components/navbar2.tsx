@@ -1,18 +1,4 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { Fragment, useState } from "react";
+import { cn } from "@/utils";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   IconHeart,
@@ -22,14 +8,14 @@ import {
   IconUser,
   IconX,
 } from "@tabler/icons-react";
-import { cn } from "@/utils";
+import { Fragment, useState } from "react";
 
-import { Logo } from "./ui/logo";
-import Link from "next/link";
 import { useModalStore } from "@/store";
-import { hasCookie, deleteCookie } from "cookies-next";
+import { deleteCookie, hasCookie } from "cookies-next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "./ui/button";
+import { Logo } from "./ui/logo";
 
 const NAV_LINKS = [
   { name: "New Arrivals", href: "/products?tags=New Arrivals" },
@@ -63,7 +49,6 @@ export default function NewNavBar() {
                 </div>
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
-                    {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
                     <ul className="ml-10 hidden gap-8 text-neutral-600 md:flex">
                       {NAV_LINKS.map((link) => (
                         <Link key={link.name} href={link.href}>
@@ -179,7 +164,7 @@ export default function NewNavBar() {
                               <button
                                 className={cn(
                                   active ? "bg-gray-100" : "",
-                                  "tetx-left block px-4 py-2 text-sm text-gray-700",
+                                  "block px-4 py-2 text-left text-sm text-gray-700",
                                 )}
                                 onClick={logout}
                               >
@@ -219,7 +204,6 @@ export default function NewNavBar() {
 
           <Disclosure.Panel className="z-10 mx-2 bg-primary-400 shadow-sm lg:hidden">
             <div className="space-y-1  px-2 pb-3 pt-2">
-              {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
               {NAV_LINKS.map((link) => (
                 <Disclosure.Button
                   key={link.name}
@@ -273,8 +257,8 @@ export default function NewNavBar() {
                 </div>
                 <div className="mt-3 space-y-1 px-2">
                   <Disclosure.Button
-                    as="a"
-                    href="#"
+                    as={Link}
+                    href="/profile"
                     className="block px-3 py-2 text-base hover:bg-primary-600"
                   >
                     Your Profile

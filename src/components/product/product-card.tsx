@@ -1,5 +1,5 @@
-import { useAddToWishlist } from "@/hooks/product/use-add-to-wishlist";
-import { useRemoveFromWishlist } from "@/hooks/product/use-remove-from-wishlist";
+import { useAddToWishlist } from "@/hooks/wishlist/use-add-to-wishlist";
+import { useRemoveFromWishlist } from "@/hooks/wishlist/use-remove-from-wishlist";
 import { Product } from "@/types";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import Image from "next/image";

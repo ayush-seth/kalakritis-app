@@ -1,6 +1,6 @@
 import { useDeleteFromCart } from "@/hooks/cart/use-delete-from-cart";
 import { useUpdateCartItemCount } from "@/hooks/cart/use-update-cart-item-count";
-import { useAddToWishlist } from "@/hooks/product/use-add-to-wishlist";
+import { useAddToWishlist } from "@/hooks/wishlist/use-add-to-wishlist";
 import { CartItem } from "@/types";
 import Image from "next/image";
 

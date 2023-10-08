@@ -1,4 +1,4 @@
-import { useWishlist } from "@/hooks/product/use-wishlist";
+import { useWishlist } from "@/hooks/wishlist/use-wishlist";
 import { Loader } from "../ui/loader";
 import { ProductCard } from "./product-card";
 import { WishlistEmptyState } from "./wishlist-empty-state";
