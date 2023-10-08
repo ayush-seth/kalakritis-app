@@ -12,7 +12,7 @@ export function SectionHeading({ className, children }: SectionHeadingProps) {
   return (
     <h2
       className={cn(
-        "text-center text-4xl font-medium text-accent-700",
+        "px-5 text-center text-3xl font-medium text-accent-700 md:text-3xl lg:text-4xl",
         className,
       )}
       style={font.style}

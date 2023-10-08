@@ -1,6 +1,7 @@
 import AddressModal from "@/components/address-modal";
 import Footer from "@/components/footer";
 import { Navbar } from "@/components/navbar";
+import NewNavBar from "@/components/navbar2";
 import { LoginModal } from "@/components/sign-up-modal";
 import { useModalStore } from "@/store";
 import "@/styles/globals.css";
@@ -25,7 +26,8 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <QueryClientProvider client={queryClient}>
         <NiceModal.Provider>
-          <Navbar />
+          <NewNavBar />
+          {/* <Navbar /> */}
           <Component {...pageProps} />
           <Footer />
           <LoginModal

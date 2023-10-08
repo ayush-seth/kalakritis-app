@@ -30,14 +30,14 @@ export default function Cart() {
 
   return (
     <>
-      <Container>
+      <Container className="px-4 md:px-12 lg:px-16">
         {cartItems.length > 0 ? (
           <Tabs.Root
             className="TabsRoot"
             value={tabValue}
             onValueChange={(v) => setTab(v as Tab)}
           >
-            <Tabs.List className="TabsList mb-20 flex justify-center gap-28">
+            <Tabs.List className="TabsList mb-20 hidden justify-center gap-28 lg:flex">
               <Tabs.Trigger
                 className="TabsTrigger text-[#808080] data-[state=active]:text-[#914C28]"
                 value="cart"
@@ -170,9 +170,13 @@ export default function Cart() {
                 </div>
               </Tabs.Trigger>
             </Tabs.List>
-            <div className="mx-auto grid max-w-[1300px] grid-cols-[1fr,400px]">
-              <div className="grow pr-10">
+            <div className="mx-auto grid max-w-[1300px] grid-cols-1 lg:grid-cols-[1fr,400px]">
+              <div className="grow lg:pr-10">
                 <Tabs.Content className="TabsContent" value="cart">
+                  <div className="mb-10 flex items-center justify-between border-b border-slate-400 pb-4 lg:hidden">
+                    <span>CART</span>
+                    <span>STEP 1/3</span>
+                  </div>
                   {cartItems.map((cartItem) => (
                     <CartCard key={cartItem.id} cartItem={cartItem} />
                   ))}
@@ -187,10 +191,14 @@ export default function Cart() {
                   className="TabsContent flex flex-wrap gap-4"
                   value="payment"
                 >
+                  <div className="mb-5 flex w-full items-center justify-between border-b border-slate-400 pb-4 lg:hidden">
+                    <span>CART</span>
+                    <span>STEP 1/3</span>
+                  </div>
                   {selectedAddress && (
                     <div className="w-full border-b border-gray-300 p-2 text-sm">
                       <div className="flex items-center justify-between">
-                        <SectionHeading className="mb-4 text-left text-xl text-black">
+                        <SectionHeading className="mb-2 px-0 text-left text-base text-black lg:mb-4 lg:text-xl">
                           Selected Address
                         </SectionHeading>
                         <IconEdit

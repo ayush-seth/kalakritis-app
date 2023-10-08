@@ -6,7 +6,7 @@ export function CelebrationSpecial() {
   return (
     <div>
       <SectionHeading className="my-20">Celebration Special</SectionHeading>
-      <div className="mx-auto mt-12 grid max-w-[1500px] grid-cols-3 items-center gap-4 px-8">
+      <div className="mx-auto mt-12 grid max-w-[1500px] grid-cols-1 items-center gap-4 px-4 md:grid-cols-3">
         <div className="">
           <Image
             src={"/cb_1.png"}
@@ -33,7 +33,7 @@ export function CelebrationSpecial() {
             SHOP NOW
           </Link>
         </div>
-        <div className="flex flex-col gap-4">
+        <div className="hidden flex-col gap-4 md:flex">
           <div className="">
             <Image
               src={"/cb_3.png"}

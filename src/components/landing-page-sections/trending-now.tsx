@@ -28,7 +28,7 @@ export function TrendingNow() {
   return (
     <div>
       <SectionHeading className="my-20">Trending Now</SectionHeading>
-      <div className="mx-auto grid max-w-[1500px] grid-cols-3 gap-4 px-8">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-1 gap-4 px-4 md:grid-cols-3">
         <div className="relative flex justify-center overflow-hidden">
           <Image
             src={"/trending_now1.svg"}

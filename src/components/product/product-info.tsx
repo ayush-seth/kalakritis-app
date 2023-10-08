@@ -5,7 +5,7 @@ export const ProductInfo = ({ product }: { product: Product }) => {
   return (
     <>
       <div className="flex items-center gap-2 text-sm">
-        <IconStarFilled className="text-gray-400" size={16} />
+        <IconStarFilled className="text-yellow-500" size={16} />
         <span>{product.avg_rating}</span>
       </div>
       <div className="flex justify-between">

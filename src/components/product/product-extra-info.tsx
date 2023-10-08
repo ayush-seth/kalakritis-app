@@ -3,7 +3,7 @@ import { ProductAccordion } from "./product-accordion";
 
 export const ProductExtraInfo = ({ product }: { product: Product }) => {
   return (
-    <div className="flex flex-col gap-2 pt-20 text-sm">
+    <div className="flex flex-col gap-2 pt-5 text-sm md:pt-20">
       <ProductAccordion
         title="Features"
         details={

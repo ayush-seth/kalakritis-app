@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { SectionHeading } from "../ui/section-heading";
+import { useRouter } from "next/router";
 
 const CATEGORIES = [
   {
@@ -25,12 +26,19 @@ const CATEGORIES = [
 ];
 
 export function ShopByCategories() {
+  let router = useRouter();
   return (
     <div>
       <SectionHeading className="my-20">Shop by Categories</SectionHeading>
-      <div className="mx-auto grid max-w-[1500px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 px-8 md:gap-8">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-2 justify-center gap-4 px-4 md:grid-cols-[repeat(auto-fit,minmax(150px,1fr))] md:gap-8">
         {CATEGORIES.map((category) => (
-          <div key={category.title} className="relative">
+          <div
+            key={category.title}
+            className="relative cursor-pointer"
+            onClick={() =>
+              router.push("/products?product_type=" + category.title)
+            }
+          >
             <Image
               src={`${category.img}.png`}
               className="w-full"

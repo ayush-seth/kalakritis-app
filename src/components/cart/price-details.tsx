@@ -33,7 +33,7 @@ export default function PriceDetails(data: PriceDetailsProps) {
   };
 
   return (
-    <div className="border-l border-slate-500 py-5 pl-10">
+    <div className="mt-10 border-slate-500 py-5 lg:mt-0 lg:border-l lg:pl-10">
       <div className="apply_coupon_area mb-16">
         <h4 className="mb-4 text-lg font-medium">APPLY COUPON</h4>
         <form className="flex gap-3" onSubmit={handleSubmit(handleApplyCoupon)}>

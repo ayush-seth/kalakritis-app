@@ -6,7 +6,7 @@ export const ProductImageViewer = ({ product }: { product: Product }) => {
   const [mainImage, setMainImage] = useState(product.product_images[0].img);
 
   return (
-    <div className="product_photos">
+    <div className="product_photos mb-10">
       <Image
         src={mainImage}
         alt=""

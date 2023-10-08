@@ -25,7 +25,7 @@ export function Select<T>({ label, data, value, onChange }: SelectProps<T>) {
               {label}
             </Listbox.Label>
           )}
-          <div className="relative mt-2">
+          <div className="relative">
             <Listbox.Button className="relative w-full border border-black bg-primary-500 py-3 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none  sm:text-sm sm:leading-6">
               <span className="block truncate">{value.label}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">

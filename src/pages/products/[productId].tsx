@@ -74,9 +74,9 @@ export default function ProductDetails() {
       <Head>
         <title>{product.title} | Kalakritis</title>
       </Head>
-      <Container>
+      <Container className="lg-px-16 px-4 md:px-12">
         <Breadcrumbs className="mb-10" items={crumbs} />
-        <div className="grid-cols-2 gap-20 sm:grid">
+        <div className="grid-cols-2 gap-10 sm:grid lg:gap-20">
           <ProductImageViewer product={product} />
           <div className="space-y-6">
             <ProductInfo product={product} />
@@ -91,7 +91,7 @@ export default function ProductDetails() {
               onChange={setSelectedColor}
             />
 
-            <div className="pt-10">
+            <div className="hidden pt-10 lg:block">
               <div className="flex items-center">
                 <Button variant="secondary" className="mr-3 bg-primary-500">
                   <IconHeart strokeWidth={1.3} />
@@ -112,15 +112,32 @@ export default function ProductDetails() {
                 buy now
               </Button>
             </div>
+            <div className="fixed bottom-0 left-0 z-10 flex w-full lg:hidden">
+              <Button
+                variant="secondary"
+                className="flex w-1/2 items-center justify-center gap-3 bg-white py-4"
+              >
+                <IconHeart strokeWidth={1.3} />
+                <span>WISHLIST</span>
+              </Button>
+              <Button
+                variant="primary"
+                className="w-1/2 py-4"
+                onClick={handleAddToCart}
+              >
+                ADD TO CART
+              </Button>
+            </div>
             <ProductExtraInfo product={product} />
           </div>
         </div>
-        <div className="mt-40 space-y-20">
+        <div className="mt-20 space-y-20 md:mt-40">
+          <SectionHeading className="my-20">Reviews</SectionHeading>
           <ProductReviewCard product={product} />
           <ProductReviewCard product={product} />
         </div>
         <SectionHeading className="my-20">Similar Items</SectionHeading>
-        <div className="grid grid-cols-4 gap-10">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {products.data?.results
             .slice(0, 4)
             .map((item) => <ProductCard key={item.id} product={item} />)}

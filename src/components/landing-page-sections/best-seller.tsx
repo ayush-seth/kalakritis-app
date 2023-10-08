@@ -12,7 +12,7 @@ export function BestSeller() {
   return (
     <div className="mb-20">
       <SectionHeading className="my-20">Bestseller</SectionHeading>
-      <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-4 px-8 md:grid-cols-4 md:gap-8">
+      <div className="mx-auto grid max-w-[1500px] grid-cols-2 gap-4 px-4 md:grid-cols-4 md:gap-8">
         {data.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

@@ -10,7 +10,7 @@ export const WishlistGrid = () => {
   if (data?.length === 0) return <WishlistEmptyState />;
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
       {data?.map(({ product, id: wishlistId }) => (
         <ProductCard
           key={product.id}
