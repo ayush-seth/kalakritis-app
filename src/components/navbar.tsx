@@ -8,7 +8,7 @@ import {
   IconUser,
   IconX,
 } from "@tabler/icons-react";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 
 import { useModalStore } from "@/store";
 import { deleteCookie, hasCookie } from "cookies-next";
@@ -34,6 +34,7 @@ export const Navbar = () => {
   const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
 
   return (
     <Disclosure as="nav" className="fixed z-10 w-full bg-primary-500 py-2 ">
@@ -64,7 +65,13 @@ export const Navbar = () => {
                   <label htmlFor="search" className="sr-only">
                     Search
                   </label>
-                  <div className="relative">
+                  <form
+                    className="relative"
+                    onSubmit={() => {
+                      router.push(`/products?search=${search}`);
+                      searchRef.current?.blur(); // close the keyboard on mobile
+                    }}
+                  >
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                       <IconSearch
                         className="h-5 w-5 text-gray-400"
@@ -78,13 +85,10 @@ export const Navbar = () => {
                       placeholder="Search products"
                       type="search"
                       value={search}
+                      ref={searchRef}
                       onChange={(e) => setSearch(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.code === "Enter")
-                          router.push(`/products?search=${search}`);
-                      }}
                     />
-                  </div>
+                  </form>
                 </div>
               </div>
               <div className="flex lg:hidden">
