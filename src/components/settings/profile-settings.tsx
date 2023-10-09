@@ -1,6 +1,6 @@
 import { useUpdateUserDetails } from "@/hooks/user/use-update-user-details";
 import { useUserDetails } from "@/hooks/user/use-user-details";
-import { RegisterOptions, useForm } from "react-hook-form";
+import { RegisterOptions, SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
@@ -26,16 +26,33 @@ export const ProfileSettings = () => {
   const {
     register,
     handleSubmit,
-    formState: { isDirty },
-  } = useForm<FormInput>();
+    getValues,
+    formState: { isDirty, dirtyFields },
+  } = useForm<FormInput>({});
 
   const { data } = useUserDetails();
   const { mutate } = useUpdateUserDetails();
 
+  const getDirtyFields = () => {
+    const fields: Record<string, string> = {};
+    Object.keys(dirtyFields).map((k) => {
+      const key = k as keyof typeof dirtyFields;
+      if (dirtyFields[key]) {
+        fields[key] = getValues(key);
+      }
+    });
+    return fields;
+  };
+
+  const handleUpdateProfile: SubmitHandler<FormInput> = () => {
+    const payload = getDirtyFields();
+    mutate(payload);
+  };
+
   return (
     <form
       className="space-y-6 md:grid md:grid-cols-2 md:gap-12 md:space-y-0"
-      onSubmit={handleSubmit((v) => mutate(v))}
+      onSubmit={handleSubmit(handleUpdateProfile)}
     >
       <Input
         label="First Name"

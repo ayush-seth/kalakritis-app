@@ -29,3 +29,14 @@ export const authenticatedClient = ky.extend({
     beforeError: [beforeErrorHook],
   },
 });
+
+// export const getDirtyFields = <T extends FieldValues>(
+//   dirtyFields: Partial<Readonly<T>>,
+//   getValues: UseFormGetValues<T>,
+// ) => {
+//   return Object.entries(dirtyFields).map(([key, value]) => {
+//     if (value) {
+//       fields[key] = getValues(key);
+//     }
+//   });
+// };

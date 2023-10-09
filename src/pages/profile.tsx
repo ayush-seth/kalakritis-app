@@ -9,7 +9,6 @@ import { Tab } from "@headlessui/react";
 import {
   IconAddressBook,
   IconArrowLeft,
-  IconHeart,
   IconKey,
   IconTruck,
   IconUser,
@@ -34,10 +33,10 @@ const TABS = [
     name: "Password",
     icon: <IconKey />,
   },
-  {
-    name: "My Wishlist",
-    icon: <IconHeart />,
-  },
+  // {
+  //   name: "My Wishlist",
+  //   icon: <IconHeart />,
+  // },
   {
     name: "My Orders",
     icon: <IconTruck />,

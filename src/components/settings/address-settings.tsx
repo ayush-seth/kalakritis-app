@@ -40,7 +40,7 @@ export const AddressSettings = () => {
           </div>
         );
       })}
-      <Button variant="secondary" onClick={() => NiceModal.show(AddressModal)}>
+      <Button variant="primary" onClick={() => NiceModal.show(AddressModal)}>
         Add address
       </Button>
     </div>
