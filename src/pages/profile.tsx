@@ -113,7 +113,6 @@ const ProfilePage = () => {
                 <PasswordSettings />
               </Tab.Panel>
               <Tab.Panel>Content 3</Tab.Panel>
-              <Tab.Panel>Content 4</Tab.Panel>
               <Tab.Panel>
                 <AddressSettings />
               </Tab.Panel>
