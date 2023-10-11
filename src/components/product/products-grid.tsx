@@ -5,8 +5,7 @@ import { ProductCard } from "./product-card";
 
 export function ProductsGrid() {
   const params = useSearchParams();
-
-  const { data, isLoading, isError } = useProducts(params);
+  const { data, isLoading } = useProducts(params);
 
   if (isLoading) return <Loader />;
 

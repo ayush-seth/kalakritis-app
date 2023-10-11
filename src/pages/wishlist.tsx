@@ -1,6 +1,6 @@
-import { WishlistGrid } from "@/components/product/wishlist-grid";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { WishlistGrid } from "@/components/wishlist/wishlist-grid";
 
 const Wishlist = () => {
   return (

@@ -4,27 +4,12 @@ import { Product } from "@/types";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import Link from "next/link";
-import { MouseEvent, useState } from "react";
 
 type ProductCardProps = {
   product: Product;
-  isWishlistItem?: boolean;
-  wishlistId?: number;
 };
 
-export function ProductCard({
-  product,
-  isWishlistItem,
-  wishlistId,
-}: ProductCardProps) {
-  function toggleWishlist(e: MouseEvent<HTMLButtonElement>) {
-    e.stopPropagation();
-    e.preventDefault();
-    setIsWishlisted((prev) => !prev);
-  }
-
-  const [isWishlisted, setIsWishlisted] = useState(isWishlistItem);
-
+export function ProductCard({ product }: ProductCardProps) {
   const addToWishlist = useAddToWishlist();
   const removeFromWishlist = useRemoveFromWishlist();
 
@@ -54,15 +39,13 @@ export function ProductCard({
           <button
             className="absolute right-2 top-2 rounded-full bg-gray-300 bg-opacity-60 p-1 hover:bg-opacity-100"
             onClick={(e) => {
-              toggleWishlist(e);
-              if (isWishlisted) {
-                removeFromWishlist.mutate(wishlistId!);
-                return;
-              }
-              addToWishlist.mutate(product.id);
+              e.preventDefault();
+              product.is_wishlisted
+                ? removeFromWishlist.mutate(product.id)
+                : addToWishlist.mutate(product.id);
             }}
           >
-            {isWishlisted ? (
+            {product.is_wishlisted ? (
               <IconHeartFilled
                 className="text-accent-700"
                 strokeWidth={1.336}

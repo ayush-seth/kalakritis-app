@@ -5,9 +5,9 @@ import toast from "react-hot-toast";
 export const useRemoveFromWishlist = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (wishlistId: number) =>
+    mutationFn: (productId: number) =>
       authenticatedClient
-        .delete(`wishlist/${wishlistId}/`)
+        .delete(`wishlist/${productId}/`)
         .json<{ details: string }>(),
     onSuccess: () => {
       toast.success("Successfully removed from wishlist");

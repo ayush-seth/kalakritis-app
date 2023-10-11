@@ -29,6 +29,7 @@ export type Product = {
   on_discount: boolean;
   discount_value: number;
   discount_percent: number;
+  is_wishlisted: boolean;
 };
 
 type ProductImage = {
