@@ -1,4 +1,6 @@
+import { useCartDetails } from "@/hooks/cart/use-cart-details";
 import { useUserDetails } from "@/hooks/user/use-user-details";
+import { useWishlist } from "@/hooks/wishlist/use-wishlist";
 import { useModalStore } from "@/store";
 import { cn } from "@/utils";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -35,6 +37,8 @@ export const Navbar = () => {
   const router = useRouter();
 
   const user = useUserDetails();
+  const cart = useCartDetails();
+  const wishlist = useWishlist();
 
   return (
     <Disclosure as="nav" className="fixed z-10 w-full bg-primary-500 py-2 ">
@@ -147,6 +151,14 @@ export const Navbar = () => {
                     }}
                   >
                     <IconHeart />
+                    {wishlist.data?.length && (
+                      <span
+                        className="absolute bottom-3 left-4 grid aspect-square w-5 place-content-center rounded-full bg-primary-800 text-sm font-bold text-white
+                    "
+                      >
+                        {wishlist.data?.length}
+                      </span>
+                    )}
                   </button>
                   <button
                     className="relative flex-shrink-0 "
@@ -159,6 +171,14 @@ export const Navbar = () => {
                     }}
                   >
                     <IconShoppingCart />
+                    {cart.data?.no_of_items && (
+                      <span
+                        className="absolute bottom-3 left-4 grid aspect-square w-5 place-content-center rounded-full bg-primary-800 text-sm font-bold text-white
+                    "
+                      >
+                        {cart.data?.no_of_items}
+                      </span>
+                    )}
                   </button>
 
                   {/* Profile dropdown */}
