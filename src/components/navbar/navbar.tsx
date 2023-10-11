@@ -65,7 +65,7 @@ export const Navbar = () => {
                               key="categories"
                             >
                               <Menu.Button>Categories</Menu.Button>
-                              <Menu.Items className="absolute top-8 w-40 space-y-4 bg-primary-600 px-3 py-4">
+                              <Menu.Items className="absolute top-8 w-52 space-y-4 bg-primary-600 px-3 py-4">
                                 <Menu.Item>
                                   <Disclosure.Button
                                     className="block px-3 py-2 hover:bg-primary-300"
