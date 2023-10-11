@@ -29,8 +29,14 @@ const AddressModal = NiceModal.create(({ address }: AddressModalProps) => {
 
   const handleAddressSubmit = (addressInput: AddressInput) => {
     if (isEditMode) {
-      updateAddress.mutate({ id: address.id, ...addressInput });
-    } else addAddress.mutate(addressInput);
+      updateAddress.mutate(
+        { id: address.id, ...addressInput },
+        { onSuccess: modal.remove },
+      );
+    } else
+      addAddress.mutate(addressInput, {
+        onSuccess: modal.remove,
+      });
   };
 
   return (
