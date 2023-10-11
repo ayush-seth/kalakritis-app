@@ -16,7 +16,7 @@ import { useProduct } from "@/hooks/product/use-product";
 import { useProducts } from "@/hooks/product/use-products";
 import { useAddToWishlist } from "@/hooks/wishlist/use-add-to-wishlist";
 import { SizeName } from "@/types";
-import { IconHeart } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import Head from "next/head";
 import { useParams } from "next/navigation";
 import { useState } from "react";
@@ -102,7 +102,11 @@ export default function ProductDetails() {
                   className="mr-3 bg-primary-500"
                   onClick={handleWishlist}
                 >
-                  <IconHeart strokeWidth={1.3} />
+                  {product.is_wishlisted ? (
+                    <IconHeartFilled />
+                  ) : (
+                    <IconHeart strokeWidth={1.3} />
+                  )}
                 </Button>
                 <Button
                   variant="secondary"
@@ -125,7 +129,11 @@ export default function ProductDetails() {
                 variant="secondary"
                 className="flex w-1/2 items-center justify-center gap-3 bg-white py-4"
               >
-                <IconHeart strokeWidth={1.3} />
+                {product.is_wishlisted ? (
+                  <IconHeartFilled />
+                ) : (
+                  <IconHeart strokeWidth={1.3} />
+                )}
                 <span>WISHLIST</span>
               </Button>
               <Button
