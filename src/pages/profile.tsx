@@ -1,4 +1,5 @@
 import { AddressSettings } from "@/components/settings/address-settings";
+import { OrderSettings } from "@/components/settings/order-settings";
 import { PasswordSettings } from "@/components/settings/password-settings";
 import { ProfileSettings } from "@/components/settings/profile-settings";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
@@ -112,7 +113,9 @@ const ProfilePage = () => {
               <Tab.Panel>
                 <PasswordSettings />
               </Tab.Panel>
-              <Tab.Panel>Content 3</Tab.Panel>
+              <Tab.Panel>
+                <OrderSettings />
+              </Tab.Panel>
               <Tab.Panel>
                 <AddressSettings />
               </Tab.Panel>
