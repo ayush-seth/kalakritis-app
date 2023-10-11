@@ -73,7 +73,14 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
   const isLoading = login.isLoading || sendOtp.isLoading || verifyOtp.isLoading;
 
   return (
-    <Modal open={open} onClose={onClose} className="px-4 md:px-8">
+    <Modal
+      open={open}
+      onClose={() => {
+        onClose();
+        setStep("Enter Email");
+      }}
+      className="px-4 md:px-8"
+    >
       <form
         className={cn(
           "grid h-screen md:h-auto md:grid-cols-[300px,1fr] md:gap-8 lg:grid-cols-[400px,1fr] lg:gap-12",

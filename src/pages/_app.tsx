@@ -1,7 +1,7 @@
 import AddressModal from "@/components/address-modal";
 import Footer from "@/components/footer";
+import { LoginModal } from "@/components/login-modal";
 import { Navbar } from "@/components/navbar/navbar";
-import { LoginModal } from "@/components/sign-up-modal";
 import { useModalStore } from "@/store";
 import "@/styles/globals.css";
 import NiceModal from "@ebay/nice-modal-react";
