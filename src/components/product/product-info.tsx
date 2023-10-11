@@ -1,7 +1,13 @@
 import { Product } from "@/types";
 import { IconShare, IconStarFilled } from "@tabler/icons-react";
+import toast from "react-hot-toast";
 
 export const ProductInfo = ({ product }: { product: Product }) => {
+  const shareProduct = async () => {
+    await navigator.clipboard.writeText(location.href);
+    toast.success("Product link has been copied to clipboard");
+  };
+
   return (
     <>
       <div className="flex items-center gap-2 text-sm">
@@ -10,7 +16,9 @@ export const ProductInfo = ({ product }: { product: Product }) => {
       </div>
       <div className="flex justify-between">
         <h1 className="text-2xl">{product.title}</h1>
-        <IconShare />
+        <button onClick={shareProduct}>
+          <IconShare />
+        </button>
       </div>
       <div className="flex items-center gap-3">
         <span className="text-xl font-bold">Rs {product.selling_price}</span>
@@ -21,7 +29,7 @@ export const ProductInfo = ({ product }: { product: Product }) => {
           ({product.discount_percent}% OFF)
         </span>
       </div>
-      <span className="text-sm text-gray-600">Inclusive of all taxes</span>
+      <span className="text-sm text-gray-600">+ taxes</span>
       <div>
         <span className="font-medium">Description</span>
         <p
