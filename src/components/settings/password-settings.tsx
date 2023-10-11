@@ -17,6 +17,7 @@ export const PasswordSettings = () => {
     register,
     handleSubmit,
     getValues,
+    reset,
     formState: { isDirty, errors },
   } = useForm<FormInput>();
 
@@ -34,12 +35,20 @@ export const PasswordSettings = () => {
       className="max-w-md space-y-6"
       onSubmit={handleSubmit(({ new_password, confirm_new_password, otp }) => {
         if (otp) {
-          changePassword.mutate({
-            email,
-            otp,
-            new_password,
-            confirm_new_password,
-          });
+          changePassword.mutate(
+            {
+              email,
+              otp,
+              new_password,
+              confirm_new_password,
+            },
+            {
+              onSuccess: () => {
+                sendOtp.reset();
+                reset();
+              },
+            },
+          );
         } else {
           sendOtp.mutate({ email });
         }
