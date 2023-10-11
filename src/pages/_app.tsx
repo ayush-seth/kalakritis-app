@@ -1,6 +1,6 @@
 import AddressModal from "@/components/address-modal";
 import Footer from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { Navbar } from "@/components/navbar/navbar";
 import { LoginModal } from "@/components/sign-up-modal";
 import { useModalStore } from "@/store";
 import "@/styles/globals.css";

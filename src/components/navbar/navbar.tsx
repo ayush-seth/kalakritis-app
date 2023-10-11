@@ -1,28 +1,28 @@
+import { useUserDetails } from "@/hooks/user/use-user-details";
+import { useModalStore } from "@/store";
 import { cn } from "@/utils";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   IconHeart,
   IconMenu2,
-  IconSearch,
   IconShoppingCart,
   IconUser,
   IconX,
 } from "@tabler/icons-react";
-import { Fragment, useRef, useState } from "react";
-
-import { useModalStore } from "@/store";
 import { deleteCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Button } from "./ui/button";
-import { Logo } from "./ui/logo";
+import { Fragment } from "react";
+import { Button } from "../ui/button";
+import { Logo } from "../ui/logo";
+import { NavSearch } from "./nav-search";
 
 const NAV_LINKS = [
   { name: "New Arrivals", href: "/products?tags=New Arrivals" },
   { name: "Categories", href: "/products" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
-];
+] as const;
 
 export const Navbar = () => {
   const isLoggedIn = hasCookie("token");
@@ -33,15 +33,16 @@ export const Navbar = () => {
 
   const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const router = useRouter();
-  const [search, setSearch] = useState("");
-  const searchRef = useRef<HTMLInputElement>(null);
+
+  const user = useUserDetails();
 
   return (
     <Disclosure as="nav" className="fixed z-10 w-full bg-primary-500 py-2 ">
       {({ open }) => (
         <>
-          <div className="mx-auto  px-2 sm:px-4 lg:px-12">
+          <div className="mx-auto px-2 sm:px-4 lg:px-12">
             <div className="relative flex h-16 items-center justify-between">
+              {/* Logo and Nav links */}
               <div className="flex items-center px-2 lg:px-0">
                 <div className="flex-shrink-0">
                   <Link href="/">
@@ -51,50 +52,80 @@ export const Navbar = () => {
                 <div className="hidden lg:ml-6 lg:block">
                   <div className="flex space-x-4">
                     <ul className="ml-10 hidden gap-8 text-neutral-600 md:flex">
-                      {NAV_LINKS.map((link) => (
-                        <Link key={link.name} href={link.href}>
-                          <li className="text-base">{link.name}</li>
-                        </Link>
-                      ))}
+                      {NAV_LINKS.map((link) => {
+                        if (link.name === "Categories") {
+                          return (
+                            <Menu
+                              as="div"
+                              className="relative"
+                              key="categories"
+                            >
+                              <Menu.Button>Categories</Menu.Button>
+                              <Menu.Items className="absolute top-8 w-40 space-y-4 bg-primary-600 px-3 py-4">
+                                <Menu.Item>
+                                  <Disclosure.Button
+                                    className="block px-3 py-2 hover:bg-primary-300"
+                                    as={Link}
+                                    href="/products?product_type=Short Kurta"
+                                  >
+                                    Short Kurta
+                                  </Disclosure.Button>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <Disclosure.Button
+                                    className="block px-3 py-2 hover:bg-primary-300"
+                                    as={Link}
+                                    href="/products?product_type=Long Kurta"
+                                  >
+                                    Long Kurta
+                                  </Disclosure.Button>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <Disclosure.Button
+                                    className="block px-3 py-2 hover:bg-primary-300"
+                                    as={Link}
+                                    href="/products?product_type=Kurta Set"
+                                  >
+                                    Kurta Set
+                                  </Disclosure.Button>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <Disclosure.Button
+                                    className="block px-3 py-2 hover:bg-primary-300"
+                                    as={Link}
+                                    href="/products?product_type=Bottom Wear"
+                                  >
+                                    Bottom Wear
+                                  </Disclosure.Button>
+                                </Menu.Item>
+                                <Menu.Item>
+                                  <Disclosure.Button
+                                    className="block px-3 py-2 hover:bg-primary-300"
+                                    as={Link}
+                                    href="/products?product_type=Gowns"
+                                  >
+                                    Gowns
+                                  </Disclosure.Button>
+                                </Menu.Item>
+                              </Menu.Items>
+                            </Menu>
+                          );
+                        } else {
+                          return (
+                            <Link key={link.name} href={link.href}>
+                              <li className="text-base">{link.name}</li>
+                            </Link>
+                          );
+                        }
+                      })}
                     </ul>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-1 justify-center px-2 lg:ml-6 lg:justify-end">
-                <div className="w-full max-w-lg lg:max-w-xs">
-                  <label htmlFor="search" className="sr-only">
-                    Search
-                  </label>
-                  <form
-                    className="relative"
-                    onSubmit={() => {
-                      router.push(`/products?search=${search}`);
-                      searchRef.current?.blur(); // close the keyboard on mobile
-                    }}
-                  >
-                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                      <IconSearch
-                        className="h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <input
-                      id="search"
-                      name="search"
-                      className="block w-full border-0 bg-primary-400 py-1.5 pl-10 pr-3 outline-none placeholder:text-gray-400  sm:text-sm sm:leading-6"
-                      placeholder="Search products"
-                      type="search"
-                      value={search}
-                      ref={searchRef}
-                      onChange={(e) => setSearch(e.target.value)}
-                    />
-                  </form>
-                </div>
-              </div>
+              <NavSearch />
+              {/* Mobile menu button */}
               <div className="flex lg:hidden">
-                {/* Mobile menu button */}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 hover:bg-primary-400 ">
-                  <span className="absolute -inset-0.5" />
+                <Disclosure.Button className="inline-flex items-center justify-center p-2 hover:bg-primary-400 ">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <IconX className="block h-6 w-6" aria-hidden="true" />
@@ -132,13 +163,10 @@ export const Navbar = () => {
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative flex-shrink-0">
-                    <div>
-                      <Menu.Button className="relative flex">
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">Open user menu</span>
-                        <IconUser />
-                      </Menu.Button>
-                    </div>
+                    <Menu.Button className="flex">
+                      <span className="sr-only">Open user menu</span>
+                      <IconUser />
+                    </Menu.Button>
                     <Transition
                       as={Fragment}
                       enter="transition ease-out duration-100"
@@ -207,27 +235,86 @@ export const Navbar = () => {
           </div>
 
           <Disclosure.Panel className="z-10 mx-2 bg-primary-400 shadow-sm lg:hidden">
-            <div className="space-y-1  px-2 pb-3 pt-2">
-              {NAV_LINKS.map((link) => (
-                <Disclosure.Button
-                  key={link.name}
-                  as="a"
-                  href={link.href}
-                  className="block px-3 py-2 text-base hover:bg-primary-600"
-                >
-                  {link.name}
-                </Disclosure.Button>
-              ))}
+            <div className="space-y-1 px-2 pb-3 pt-2">
+              {NAV_LINKS.map((link) => {
+                if (link.name === "Categories") {
+                  return (
+                    <Menu key="categories">
+                      <Menu.Button className="block w-full cursor-pointer px-3 py-2 text-left text-base hover:bg-primary-600">
+                        Categories
+                      </Menu.Button>
+                      <Menu.Items className="space-y-4 bg-primary-500 px-3 py-4">
+                        <Menu.Item>
+                          <Disclosure.Button
+                            className="block px-3 py-2 hover:bg-primary-300"
+                            as={Link}
+                            href="/products?product_type=Short Kurta"
+                          >
+                            Short Kurta
+                          </Disclosure.Button>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <Disclosure.Button
+                            className="block px-3 py-2 hover:bg-primary-300"
+                            as={Link}
+                            href="/products?product_type=Long Kurta"
+                          >
+                            Long Kurta
+                          </Disclosure.Button>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <Disclosure.Button
+                            className="block px-3 py-2 hover:bg-primary-300"
+                            as={Link}
+                            href="/products?product_type=Kurta Set"
+                          >
+                            Kurta Set
+                          </Disclosure.Button>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <Disclosure.Button
+                            className="block px-3 py-2 hover:bg-primary-300"
+                            as={Link}
+                            href="/products?product_type=Bottom Wear"
+                          >
+                            Bottom Wear
+                          </Disclosure.Button>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <Disclosure.Button
+                            className="block px-3 py-2 hover:bg-primary-300"
+                            as={Link}
+                            href="/products?product_type=Gowns"
+                          >
+                            Gowns
+                          </Disclosure.Button>
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Menu>
+                  );
+                } else {
+                  return (
+                    <Disclosure.Button
+                      key={link.name}
+                      as={Link}
+                      href={link.href}
+                      className="block px-3 py-2 text-base hover:bg-primary-600"
+                    >
+                      {link.name}
+                    </Disclosure.Button>
+                  );
+                }
+              })}
             </div>
             {isLoggedIn ? (
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center justify-between px-5">
                   <div className="">
                     <div className="text-base font-medium">
-                      Ravi Kumar Singh
+                      {user.data?.first_name} {user.data?.last_name}
                     </div>
                     <div className="text-sm font-medium text-gray-400">
-                      ravi@gmail.com
+                      {user.data?.email}
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
