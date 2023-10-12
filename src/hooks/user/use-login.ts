@@ -1,6 +1,6 @@
 import { useModalStore } from "@/store";
 import { client } from "@/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { setCookie } from "cookies-next";
 import toast from "react-hot-toast";
 
@@ -14,6 +14,7 @@ type LoginResponse = {
 
 export function useLogin() {
   const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ email, password }: LoginInput) =>
       client
@@ -24,6 +25,8 @@ export function useLogin() {
       setCookie("token", access);
       setShowLoginModal(false);
       toast.success(`Welcome ${fullname}!`);
+      queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+      queryClient.invalidateQueries({ queryKey: ["cart-details"] });
     },
   });
 }

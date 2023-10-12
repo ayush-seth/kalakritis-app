@@ -23,20 +23,11 @@ export const authenticatedClient = ky.extend({
   prefixUrl: `${process.env.NEXT_PUBLIC_BACKEND_URL}/api`,
   hooks: {
     beforeRequest: [
-      (request) =>
-        request.headers.set("Authorization", `Bearer ${getCookie("token")}`),
+      (request) => {
+        const token = getCookie("token");
+        request.headers.set("Authorization", `Bearer ${token}`);
+      },
     ],
     beforeError: [beforeErrorHook],
   },
 });
-
-// export const getDirtyFields = <T extends FieldValues>(
-//   dirtyFields: Partial<Readonly<T>>,
-//   getValues: UseFormGetValues<T>,
-// ) => {
-//   return Object.entries(dirtyFields).map(([key, value]) => {
-//     if (value) {
-//       fields[key] = getValues(key);
-//     }
-//   });
-// };

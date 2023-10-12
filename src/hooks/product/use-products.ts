@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/types";
-import { client } from "@/utils";
+import { authenticatedClient } from "@/utils";
 import { useQuery } from "@tanstack/react-query";
 import { ReadonlyURLSearchParams } from "next/navigation";
 
@@ -11,5 +11,7 @@ export function useProducts(query?: ReadonlyURLSearchParams) {
 }
 
 function fetchProducts(searchParams?: string) {
-  return client.get("products", { searchParams }).json<ApiResponse>();
+  return authenticatedClient
+    .get("products", { searchParams })
+    .json<ApiResponse>();
 }

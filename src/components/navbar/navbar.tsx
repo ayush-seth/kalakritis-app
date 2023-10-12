@@ -11,6 +11,7 @@ import {
   IconUser,
   IconX,
 } from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { deleteCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -28,7 +29,9 @@ const NAV_LINKS = [
 
 export const Navbar = () => {
   const isLoggedIn = hasCookie("token");
+  const queryClient = useQueryClient();
   const logout = () => {
+    queryClient.clear();
     deleteCookie("token");
     router.push("/");
   };
