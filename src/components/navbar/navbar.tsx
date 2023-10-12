@@ -174,7 +174,7 @@ export const Navbar = () => {
                     }}
                   >
                     <IconShoppingCart />
-                    {cart.data?.no_of_items && (
+                    {cart.isSuccess && cart.data.no_of_items > 0 && (
                       <span
                         className="absolute bottom-3 left-4 grid aspect-square w-5 place-content-center rounded-full bg-primary-800 text-sm font-bold text-white
                     "

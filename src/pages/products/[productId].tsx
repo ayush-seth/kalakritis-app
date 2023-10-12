@@ -15,6 +15,7 @@ import { useBuyNow } from "@/hooks/cart/use-buy-now";
 import { useProduct } from "@/hooks/product/use-product";
 import { useProducts } from "@/hooks/product/use-products";
 import { useAddToWishlist } from "@/hooks/wishlist/use-add-to-wishlist";
+import { useRemoveFromWishlist } from "@/hooks/wishlist/use-remove-from-wishlist";
 import { SizeName } from "@/types";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import Head from "next/head";
@@ -23,15 +24,13 @@ import { useState } from "react";
 
 export default function ProductDetails() {
   const params = useParams();
-  const {
-    data: product,
-    isError,
-    isLoading,
-  } = useProduct(params?.productId as string);
+  const productId = Number(params?.productId);
+  const { data: product, isError, isLoading } = useProduct(productId);
 
   const addToCart = useAddToCart();
   const buyNow = useBuyNow();
   const addToWishlist = useAddToWishlist();
+  const removeFromWishlist = useRemoveFromWishlist();
 
   const products = useProducts();
   const [selectedSize, setSelectedSize] = useState<SizeName>();
@@ -59,7 +58,11 @@ export default function ProductDetails() {
   };
 
   const handleWishlist = () => {
-    addToWishlist.mutate(product.id);
+    if (product.is_wishlisted) {
+      removeFromWishlist.mutate(product.id);
+    } else {
+      addToWishlist.mutate(product.id);
+    }
   };
 
   const crumbs = [
@@ -128,6 +131,7 @@ export default function ProductDetails() {
               <Button
                 variant="secondary"
                 className="flex w-1/2 items-center justify-center gap-3 bg-white py-4"
+                onClick={handleWishlist}
               >
                 {product.is_wishlisted ? (
                   <IconHeartFilled />

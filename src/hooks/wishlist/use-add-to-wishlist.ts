@@ -1,5 +1,6 @@
 import { authenticatedClient } from "@/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { HTTPError } from "ky";
 import toast from "react-hot-toast";
 
 export const useAddToWishlist = () => {
@@ -9,10 +10,11 @@ export const useAddToWishlist = () => {
       authenticatedClient
         .post("wishlist/", { json: { product: productId } })
         .json<{ details: string }>(),
-    onSuccess: ({ details }) => {
+    onSuccess: ({ details }, productId) => {
       toast.success(details);
       queryClient.invalidateQueries({ queryKey: ["wishlist"] });
+      queryClient.invalidateQueries({ queryKey: ["product", productId] });
     },
-    onError: () => toast.error("Error adding to wishlist"),
+    onError: (e) => toast.error((e as HTTPError).message),
   });
 };
