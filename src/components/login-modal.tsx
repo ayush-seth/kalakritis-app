@@ -4,6 +4,7 @@ import { useRegister } from "@/hooks/user/use-register";
 import { useSendOtp } from "@/hooks/user/use-send-otp";
 import { useVerifyOtp } from "@/hooks/user/use-verify-otp";
 import { cn } from "@/utils";
+import NiceModal, { useModal } from "@ebay/nice-modal-react";
 import { IconArrowLeft } from "@tabler/icons-react";
 import { Frank_Ruhl_Libre } from "next/font/google";
 import Image from "next/image";
@@ -33,7 +34,7 @@ type Inputs = {
 
 const font = Frank_Ruhl_Libre({ weight: ["500"], subsets: ["latin"] });
 
-export function LoginModal({ open, onClose }: LoginModalProps) {
+export const LoginModal = NiceModal.create(() => {
   const {
     register,
     handleSubmit,
@@ -49,6 +50,8 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
   const sendOtp = useSendOtp();
   const verifyOtp = useVerifyOtp();
   const registerUser = useRegister();
+
+  const modal = useModal();
 
   function goToEmailStep() {
     setModalTitle("Get Instant Discount");
@@ -73,14 +76,7 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
   const isLoading = login.isLoading || sendOtp.isLoading || verifyOtp.isLoading;
 
   return (
-    <Modal
-      open={open}
-      onClose={() => {
-        onClose();
-        setStep("Enter Email");
-      }}
-      className="px-4 md:px-8"
-    >
+    <Modal open={modal.visible} onClose={modal.remove} className="px-4 md:px-8">
       <form
         className={cn(
           "grid h-screen md:h-auto md:grid-cols-[300px,1fr] md:gap-8 lg:grid-cols-[400px,1fr] lg:gap-12",
@@ -277,4 +273,4 @@ export function LoginModal({ open, onClose }: LoginModalProps) {
       </form>
     </Modal>
   );
-}
+});

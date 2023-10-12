@@ -1,5 +1,6 @@
-import { useModalStore } from "@/store";
+import { LoginModal } from "@/components/login-modal";
 import { client } from "@/utils";
+import NiceModal from "@ebay/nice-modal-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { setCookie } from "cookies-next";
 import toast from "react-hot-toast";
@@ -13,7 +14,6 @@ type LoginResponse = {
 };
 
 export function useLogin() {
-  const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ email, password }: LoginInput) =>
@@ -23,7 +23,7 @@ export function useLogin() {
     onSuccess: ({ access, user_id, fullname }) => {
       setCookie("userId", user_id);
       setCookie("token", access);
-      setShowLoginModal(false);
+      NiceModal.remove(LoginModal);
       toast.success(`Welcome ${fullname}!`);
       queryClient.invalidateQueries({ queryKey: ["wishlist"] });
       queryClient.invalidateQueries({ queryKey: ["cart-details"] });

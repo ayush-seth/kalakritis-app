@@ -1,23 +1,16 @@
-import AddressModal from "@/components/address-modal";
 import Footer from "@/components/footer";
-import { LoginModal } from "@/components/login-modal";
 import { Navbar } from "@/components/navbar/navbar";
-import { useModalStore } from "@/store";
-import "@/styles/globals.css";
 import NiceModal from "@ebay/nice-modal-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 
-NiceModal.register("address-modal", AddressModal);
+import "@/styles/globals.css";
 
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
-  const showLoginModal = useModalStore((s) => s.showLoginModal);
-  const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
-
   return (
     <>
       <Head>
@@ -26,13 +19,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <NiceModal.Provider>
           <Navbar />
-          {/* <Navbar /> */}
           <Component {...pageProps} />
           <Footer />
-          <LoginModal
-            open={showLoginModal}
-            onClose={() => setShowLoginModal(false)}
-          />
         </NiceModal.Provider>
       </QueryClientProvider>
       <Toaster />

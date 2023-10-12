@@ -1,8 +1,8 @@
 import { useCartDetails } from "@/hooks/cart/use-cart-details";
 import { useUserDetails } from "@/hooks/user/use-user-details";
 import { useWishlist } from "@/hooks/wishlist/use-wishlist";
-import { useModalStore } from "@/store";
 import { cn } from "@/utils";
+import NiceModal from "@ebay/nice-modal-react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   IconHeart,
@@ -16,6 +16,7 @@ import { deleteCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
+import { LoginModal } from "../login-modal";
 import { Button } from "../ui/button";
 import { Logo } from "../ui/logo";
 import { NavSearch } from "./nav-search";
@@ -36,7 +37,6 @@ export const Navbar = () => {
     router.push("/");
   };
 
-  const setShowLoginModal = useModalStore((s) => s.setShowLoginModal);
   const router = useRouter();
 
   const user = useUserDetails();
@@ -149,7 +149,7 @@ export const Navbar = () => {
                       if (isLoggedIn) {
                         router.push("/wishlist");
                       } else {
-                        setShowLoginModal(true);
+                        NiceModal.show(LoginModal);
                       }
                     }}
                   >
@@ -169,7 +169,7 @@ export const Navbar = () => {
                       if (isLoggedIn) {
                         router.push("/cart");
                       } else {
-                        setShowLoginModal(true);
+                        NiceModal.show(LoginModal);
                       }
                     }}
                   >
@@ -235,14 +235,14 @@ export const Navbar = () => {
                               <Button
                                 variant="primary"
                                 className="mb-2 block  w-full px-8"
-                                onClick={() => setShowLoginModal(true)}
+                                onClick={() => NiceModal.show(LoginModal)}
                               >
                                 LOGIN
                               </Button>
                               <Button
                                 variant="secondary"
                                 className="w-full px-8"
-                                onClick={() => setShowLoginModal(true)}
+                                onClick={() => NiceModal.show(LoginModal)}
                               >
                                 SIGN UP
                               </Button>
@@ -348,7 +348,7 @@ export const Navbar = () => {
                         if (isLoggedIn) {
                           router.push("/wishlist");
                         } else {
-                          setShowLoginModal(true);
+                          NiceModal.show(LoginModal);
                         }
                       }}
                     >
@@ -361,7 +361,7 @@ export const Navbar = () => {
                         if (isLoggedIn) {
                           router.push("/cart");
                         } else {
-                          setShowLoginModal(true);
+                          NiceModal.show(LoginModal);
                         }
                       }}
                     >
@@ -391,14 +391,14 @@ export const Navbar = () => {
                 <Button
                   variant="primary"
                   className="px-8"
-                  onClick={() => setShowLoginModal(true)}
+                  onClick={() => NiceModal.show(LoginModal)}
                 >
                   LOGIN
                 </Button>
                 <Button
                   variant="secondary"
                   className="px-8"
-                  onClick={() => setShowLoginModal(true)}
+                  onClick={() => NiceModal.show(LoginModal)}
                 >
                   SIGN UP
                 </Button>
