@@ -44,7 +44,7 @@ export const Navbar = () => {
   const wishlist = useWishlist();
 
   return (
-    <Disclosure as="nav" className="fixed z-10 w-full bg-primary-500 py-2 ">
+    <Disclosure as="nav" className="fixed z-20 w-full bg-primary-500 py-2 ">
       {({ open }) => (
         <>
           <div className="mx-auto px-2 sm:px-4 lg:px-12">
@@ -353,6 +353,14 @@ export const Navbar = () => {
                       }}
                     >
                       <IconHeart />
+                      {wishlist.data?.length && (
+                        <span
+                          className="absolute bottom-3 left-4 grid aspect-square w-5 place-content-center rounded-full bg-primary-800 text-sm font-bold text-white
+                    "
+                        >
+                          {wishlist.data?.length}
+                        </span>
+                      )}
                     </Disclosure.Button>
                     <Disclosure.Button
                       as="button"
@@ -366,6 +374,14 @@ export const Navbar = () => {
                       }}
                     >
                       <IconShoppingCart />
+                      {cart.isSuccess && cart.data.no_of_items > 0 && (
+                        <span
+                          className="absolute bottom-3 left-4 grid aspect-square w-5 place-content-center rounded-full bg-primary-800 text-sm font-bold text-white
+                    "
+                        >
+                          {cart.data?.no_of_items}
+                        </span>
+                      )}
                     </Disclosure.Button>
                   </div>
                 </div>
