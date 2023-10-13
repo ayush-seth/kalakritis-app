@@ -12,7 +12,10 @@ type UserStore = {
 
 export const useUserStore = create<UserStore>((set) => ({
   tab: "cart",
-  setTab: (tab) => set({ tab }),
+  setTab: (tab) => {
+    set({ tab });
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
 
   selectedAddress: null,
   setSelectedAddress: (a) => set({ selectedAddress: a }),
