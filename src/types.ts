@@ -4,6 +4,7 @@ export type ApiResponse = {
   html_context: {
     next_url: string | null;
     previous_url: string | null;
+    page_links: [string, number, boolean, boolean][];
   };
   results: Product[];
 };
