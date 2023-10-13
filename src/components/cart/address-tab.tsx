@@ -18,10 +18,6 @@ export const AddressTab = () => {
 
   return (
     <>
-      <div className="mb-10 flex w-full items-center justify-between border-b border-slate-400 pb-4 lg:hidden">
-        <span>CART</span>
-        <span>STEP 2/3</span>
-      </div>
       {addresses.data?.map((address) => (
         <AddressCard key={address.id} address={address} onEdit={handleEdit} />
       ))}
