@@ -1,6 +1,7 @@
 import { useCartDetails } from "@/hooks/cart/use-cart-details";
 import { useUserDetails } from "@/hooks/user/use-user-details";
 import { useWishlist } from "@/hooks/wishlist/use-wishlist";
+import { useUserStore } from "@/store";
 import { cn } from "@/utils";
 import NiceModal from "@ebay/nice-modal-react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
@@ -42,6 +43,8 @@ export const Navbar = () => {
   const user = useUserDetails();
   const cart = useCartDetails();
   const wishlist = useWishlist();
+
+  const setTab = useUserStore((s) => s.setTab);
 
   return (
     <Disclosure as="nav" className="fixed z-20 w-full bg-primary-500 py-2 ">
@@ -167,6 +170,7 @@ export const Navbar = () => {
                     className="relative flex-shrink-0 "
                     onClick={() => {
                       if (isLoggedIn) {
+                        setTab("cart");
                         router.push("/cart");
                       } else {
                         NiceModal.show(LoginModal);
@@ -368,6 +372,7 @@ export const Navbar = () => {
                       onClick={() => {
                         if (isLoggedIn) {
                           router.push("/cart");
+                          setTab("cart");
                         } else {
                           NiceModal.show(LoginModal);
                         }
