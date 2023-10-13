@@ -14,7 +14,7 @@ export default function CartCard({ cartItem }: CartCardProps) {
   const addToWishlist = useAddToWishlist();
 
   return (
-    <div className="flex w-full gap-2 border-b border-slate-500 pb-3 md:gap-5 lg:p-3">
+    <div className="flex w-full gap-2 border-b border-slate-500 p-3 md:gap-5 lg:p-3">
       <div className="shrink-0 basis-[95px] md:basis-[130px]">
         <Image
           src={cartItem.product.product_images[0].img}
