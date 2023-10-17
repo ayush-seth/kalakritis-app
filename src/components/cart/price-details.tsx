@@ -1,19 +1,16 @@
 import { Button } from "@/components/ui/button";
+import {
+  InitiatePaymentPayload,
+  useInitiatePayment,
+} from "@/hooks/use-initiate-payment";
 import { useUserStore } from "@/store";
-import { CouponDetails } from "@/types";
+import { CartDetails } from "@/types";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
-type PriceDetailsProps = {
-  no_of_items: number;
-  subtotal: number;
-  delivery_charges: string;
-  tax: number;
-  coupon_details: CouponDetails;
-  total: number;
-};
+type PriceDetailsProps = CartDetails;
 
 export default function PriceDetails(data: PriceDetailsProps) {
   const { register, handleSubmit } = useForm<{
@@ -23,8 +20,11 @@ export default function PriceDetails(data: PriceDetailsProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
+  const selectedAddress = useUserStore((s) => s.selectedAddress);
   const tabValue = useUserStore((s) => s.tab);
   const setTab = useUserStore((s) => s.setTab);
+
+  const initiatePayment = useInitiatePayment();
 
   const handleApplyCoupon = ({ coupon }: { coupon: string }) => {
     const params = new URLSearchParams(searchParams);
@@ -111,7 +111,24 @@ export default function PriceDetails(data: PriceDetailsProps) {
         <Button
           variant="primary"
           className="w-full"
-          onClick={() => setTab("shipping")}
+          onClick={() => {
+            if (!selectedAddress) return;
+
+            const payload: InitiatePaymentPayload = {
+              ...selectedAddress,
+              ...data,
+              coupon_name: data.coupon_details.coupon_name,
+              delivery_charges: 0,
+              coupon_discount: data.coupon_details.coupon_discount,
+              ordered_products: data.cart_items.map((item) => ({
+                color: item.color,
+                qty: item.qty,
+                size: item.size,
+                product: item.product.id,
+              })),
+            };
+            initiatePayment.mutate(payload);
+          }}
         >
           pay now
         </Button>

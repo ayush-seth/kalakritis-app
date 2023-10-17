@@ -87,7 +87,7 @@ export type Address = {
 export type CartDetails = {
   no_of_items: number;
   subtotal: number;
-  delivery_charges: string;
+  delivery_charges: number;
   tax: number;
   total: number;
   cart_items: CartItem[];
@@ -97,7 +97,7 @@ export type CartDetails = {
 export type CouponDetails = {
   coupon_name: string;
   coupon_percent: string;
-  coupon_discount: string;
+  coupon_discount: number;
   coupon_success_message: string;
   coupon_error_message: string;
 };

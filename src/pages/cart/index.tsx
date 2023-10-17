@@ -26,7 +26,6 @@ export default function Cart() {
   }
 
   const cartItems = cartDetails.data.cart_items;
-  const priceDetails = cartDetails.data;
 
   return (
     <>
@@ -347,7 +346,7 @@ export default function Cart() {
                   ))}
                 </Tabs.Content>
               </div>
-              <PriceDetails {...priceDetails} />
+              <PriceDetails {...cartDetails.data} />
             </div>
           </Tabs.Root>
         ) : (
