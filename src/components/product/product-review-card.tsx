@@ -1,8 +1,8 @@
-import { Product } from "@/types";
-import { IconStarFilled } from "@tabler/icons-react";
+import { ProductReview } from "@/types";
 import Image from "next/image";
+import { RatingStars } from "../ui/rating-stars";
 
-export const ProductReviewCard = ({ product }: { product: Product }) => {
+export const ProductReviewCard = ({ review }: { review: ProductReview }) => {
   return (
     <div>
       <div className="flex items-center gap-4">
@@ -15,23 +15,10 @@ export const ProductReviewCard = ({ product }: { product: Product }) => {
         />
         <div className="text-sm">
           Ravi Kumar Singh
-          <div className="flex gap-1">
-            <IconStarFilled size={12} className="text-yellow-500" />
-            <IconStarFilled size={12} className="text-yellow-500" />
-            <IconStarFilled size={12} className="text-yellow-500" />
-            <IconStarFilled size={12} className="text-yellow-500" />
-            <IconStarFilled size={12} className="text-gray-300" />
-          </div>
+          <RatingStars rating={review.rating} />
         </div>
       </div>
-      <p className="mt-4 text-xs">
-        offers a bespoke range of exquisite corporate gifts options for
-        allenterprize models; from small scale to blue chip companies. offers a
-        bespoke range of exquisite corporate gifts options for allenterprize
-        models; from small scale to blue chip companies.offers a bespoke range
-        of exquisite corporate gifts options for allenterprize models; from
-        small scale to blue chip companies.
-      </p>
+      <p className="mt-4 text-xs">{review.review}</p>
     </div>
   );
 };

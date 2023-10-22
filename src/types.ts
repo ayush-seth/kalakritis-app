@@ -13,6 +13,7 @@ export type Product = {
   id: number;
   product_images: ProductImage[];
   product_type: ProductType;
+  product_reviews: ProductReview[];
   colors: Color[];
   tags: Tag[];
   sizes: Size[];
@@ -31,6 +32,15 @@ export type Product = {
   discount_value: number;
   discount_percent: number;
   is_wishlisted: boolean;
+};
+
+export type ProductReview = {
+  id: number;
+  rating: number;
+  review: string;
+  reviewimages_set: {
+    img: string;
+  }[];
 };
 
 type ProductImage = {

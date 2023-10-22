@@ -153,8 +153,9 @@ export default function ProductDetails() {
         </div>
         <div className="mt-20 space-y-20 md:mt-40">
           <SectionHeading className="my-20">Reviews</SectionHeading>
-          <ProductReviewCard product={product} />
-          <ProductReviewCard product={product} />
+          {product.product_reviews.map((review) => (
+            <ProductReviewCard key={review.id} review={review} />
+          ))}
         </div>
         <SectionHeading className="my-20">Similar Items</SectionHeading>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
